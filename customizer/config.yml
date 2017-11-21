@@ -1,0 +1,9 @@
+# This is the customizer's master module list.
+# Each item in the list is a module with any of these keys:
+#   - sass: Name of the CSS export. 'grid' becomes '@include siteapp-grid;'
+#   - js: Name of the JavaScript file. 'accordion' becomes 'siteapp.accordion.js'
+
+
+#accordion_menu:
+#  sass: accordion-menu
+#  js: accordionMenu
