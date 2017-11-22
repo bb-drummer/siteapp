@@ -4,142 +4,179 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var myApp = new window.Siteapp();
-myApp.addToGlobal();
-myApp.addToJquery($);
+var MyApp = function (_Siteapp) {
+  _inherits(MyApp, _Siteapp);
+
+  function MyApp() {
+    _classCallCheck(this, MyApp);
+
+    return _possibleConstructorReturn(this, (MyApp.__proto__ || Object.getPrototypeOf(MyApp)).apply(this, arguments));
+  }
+
+  return MyApp;
+}(Siteapp);
+
+;
+
+var myApp = new MyApp();
+
+window.Siteapp = Siteapp;
+window.MyApp = MyApp;
+window.myApp = myApp;
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var $el = $('<div data-siteapp-myplugin></div>');
 var myObj;
 
 describe('Siteapp core', function () {
-  it('exists on the window', function () {
-    myApp.should.be.an('object');
-  });
+	it('exists on the window', function () {
+		myApp.addToGlobal(window, false);
+		window.myApp.should.be.an('object');
+	});
 
-  it('is a jQuery prototype function', function () {
-    $.fn.siteapp.should.to.be.a('function');
-  });
+	it('is a jQuery prototype function', function () {
+		myApp.addToJquery($);
+		$.fn.siteapp.should.be.a('function');
+	});
 
-  describe('rtl()', function () {
-    it('detects the text direction on the document', function () {
-      myApp.rtl().should.be.false;
-      $('html').attr('dir', 'rtl');
+	it('has a module plugin shortcut ("$$x", respectively "$$xyz") ', function () {
+		myApp.addPluginShortcut(window);
+		window['$$M'].should.be.a('function');
+		window['$$MyApp'].should.be.a('function');
+	});
 
-      myApp.rtl().should.be.true;
-      $('html').attr('dir', 'ltr');
-    });
-  });
+	it('has a module plugin shortcut (long name "$$xyz") ', function () {
+		myApp.addPluginShortcut(window);
+	});
 
-  describe('plugin()', function () {
-    afterEach(function () {
-      delete myApp._plugins['siteapp-plugin'];
-      delete myApp.Plugin;
-    });
+	describe('[BC] Foundation compatiblity tests', function () {
+		describe('rtl()', function () {
+			it('detects the text direction on the document', function () {
+				myApp.rtl().should.be.false;
+				$('html').attr('dir', 'rtl');
 
-    it('adds Siteapp modules', function () {
-      var Plugin = function (_myApp$Module) {
-        _inherits(Plugin, _myApp$Module);
+				myApp.rtl().should.be.true;
+				$('html').attr('dir', 'ltr');
+			});
+		});
 
-        function Plugin() {
-          _classCallCheck(this, Plugin);
+		describe('plugin()', function () {
+			afterEach(function () {
+				delete myApp._plugins['siteapp-plugin'];
+				delete myApp.Plugin;
+			});
 
-          return _possibleConstructorReturn(this, (Plugin.__proto__ || Object.getPrototypeOf(Plugin)).apply(this, arguments));
-        }
+			it('adds Siteapp modules', function () {
+				var Plugin = function (_myApp$Module) {
+					_inherits(Plugin, _myApp$Module);
 
-        return Plugin;
-      }(myApp.Module);
+					function Plugin() {
+						_classCallCheck(this, Plugin);
 
-      ;
-      myApp.plugin(Plugin, 'Plugin');
+						return _possibleConstructorReturn(this, (Plugin.__proto__ || Object.getPrototypeOf(Plugin)).apply(this, arguments));
+					}
 
-      myApp.Modules._modules['siteapp-plugin'].should.be.a('function');
-      myApp.plugin.should.be.a('function');
-    });
+					return Plugin;
+				}(myApp.Module);
 
-    it('uses the name of the module class/function if one is not provided', function () {
-      var Plugin = function (_myApp$Module2) {
-        _inherits(Plugin, _myApp$Module2);
+				;
+				myApp.plugin(Plugin, 'Plugin');
 
-        function Plugin() {
-          _classCallCheck(this, Plugin);
+				myApp.Modules._modules['siteapp-plugin'].should.be.a('function');
+				myApp.plugin.should.be.a('function');
+			});
 
-          return _possibleConstructorReturn(this, (Plugin.__proto__ || Object.getPrototypeOf(Plugin)).apply(this, arguments));
-        }
+			it('uses the name of the module class/function if one is not provided', function () {
+				var Plugin = function (_myApp$Module2) {
+					_inherits(Plugin, _myApp$Module2);
 
-        return Plugin;
-      }(myApp.Module);
+					function Plugin() {
+						_classCallCheck(this, Plugin);
 
-      ;
-      myApp.plugin(Plugin);
+						return _possibleConstructorReturn(this, (Plugin.__proto__ || Object.getPrototypeOf(Plugin)).apply(this, arguments));
+					}
 
-      myApp.Modules._modules['siteapp-plugin'].should.be.a('function');
-      myApp.plugin.should.be.a('function');
-    });
-  });
+					return Plugin;
+				}(myApp.Module);
 
-  describe('registerPlugin()', function () {
-    it('registers a new instance of a plugin', function () {
-      var MyPlugin = function (_myApp$Module3) {
-        _inherits(MyPlugin, _myApp$Module3);
+				;
+				myApp.plugin(Plugin);
 
-        function MyPlugin() {
-          _classCallCheck(this, MyPlugin);
+				myApp.Modules._modules['siteapp-plugin'].should.be.a('function');
+				myApp.plugin.should.be.a('function');
+			});
+		});
 
-          return _possibleConstructorReturn(this, (MyPlugin.__proto__ || Object.getPrototypeOf(MyPlugin)).apply(this, arguments));
-        }
+		describe('registerPlugin()', function () {
+			it('registers a new instance of a plugin', function () {
+				var MyPlugin = function (_myApp$Module3) {
+					_inherits(MyPlugin, _myApp$Module3);
 
-        return MyPlugin;
-      }(myApp.Module);
+					function MyPlugin() {
+						_classCallCheck(this, MyPlugin);
 
-      ;
-      myApp.plugin(Plugin, 'Myplugin');
+						return _possibleConstructorReturn(this, (MyPlugin.__proto__ || Object.getPrototypeOf(MyPlugin)).apply(this, arguments));
+					}
 
-      myObj = new myApp.Module($el, {});
-      $el.data(myApp.appName + 'Plugin', myObj);
-      myApp.registerPlugin(myObj);
+					return MyPlugin;
+				}(myApp.Module);
 
-      myObj.should.be.a('object');
-      myObj.uuid.should.be.a('string');
-      myObj.uuid.should.not.be.empty;
-      myApp.Modules._uuids.indexOf(myObj.uuid).should.not.equal(-1);
-    });
-  });
+				;
+				myApp.plugin(Plugin, 'Myplugin');
 
-  describe('unregisterPlugin()', function () {
-    it('un-registers a plugin being destroyed', function () {
-      myApp.unregisterPlugin(myObj);
-      myApp.Modules._uuids.indexOf(myObj.uuid).should.equal(-1);
-    });
-  });
+				myObj = new myApp.Module($el, {});
+				$el.data(myApp.appName + 'Plugin', myObj);
+				myApp.registerPlugin(myObj);
 
-  xdescribe('reInit()', function () {});
+				myObj.should.be.a('object');
+				myObj.uuid.should.be.a('string');
+				myObj.uuid.should.not.be.empty;
+				myApp.Modules._uuids.indexOf(myObj.uuid).should.not.equal(-1);
+			});
+		});
 
-  describe('GetYoDigits()', function () {
-    it('generates a random ID matching a given length', function () {
-      var id = myApp.GetYoDigits(6);
+		describe('unregisterPlugin()', function () {
+			it('un-registers a plugin being destroyed', function () {
+				myApp.unregisterPlugin(myObj);
+				myApp.Modules._uuids.indexOf(myObj.uuid).should.equal(-1);
+			});
+		});
 
-      id.should.be.a('string');
-      id.should.have.lengthOf(6);
-    });
+		describe('GetYoDigits()', function () {
+			it('generates a random ID matching a given length', function () {
+				var id = myApp.GetYoDigits(6);
 
-    it('can append a namespace to the number', function () {
-      var id = myApp.GetYoDigits(6, 'plugin');
+				id.should.be.a('string');
+				id.should.have.lengthOf(6);
+			});
 
-      id.should.be.a('string');
-      id.should.have.lengthOf(6 + '-plugin'.length);
-      id.should.contain('-plugin');
-    });
-  });
+			it('can append a namespace to the number', function () {
+				var id = myApp.GetYoDigits(6, 'plugin');
 
-  describe('reflow()', function () {});
+				id.should.be.a('string');
+				id.should.have.lengthOf(6 + '-plugin'.length);
+				id.should.contain('-plugin');
+			});
+		});
 
-  describe('getFnName()', function () {});
+		describe('run()', function () {});
 
-  describe('transitionEnd()', function () {});
+		describe('reInit()', function () {});
 
-  describe('throttle()', function () {});
+		describe('reflow()', function () {});
+
+		describe('getFnName()', function () {});
+
+		describe('transitionEnd()', function () {});
+
+		describe('throttle()', function () {});
+	});
 });
-describe('Keyboard util', function () {
+describe('Keyboard event module', function () {
   /**
    * Creates a dummy event to parse.
    * Uses jQuery Event class constructor.
@@ -368,4 +405,69 @@ describe('Keyboard util', function () {
       $html.remove();
     });
   });
+});
+
+describe('Log module', function () {
+
+    it('Logger object is present within application namespace/class/object', function () {
+
+        myApp.Log.should.be.an('object');
+    });
+
+    it('Shortcut returns Logger object', function () {
+
+        myApp.L.should.be.an('object');
+    });
+
+    it('clear() empties the list of entries', function () {
+
+        myApp.L.clear();
+
+        myApp.L.logentries.should.be.empty;
+    });
+
+    it('log() adds a new one to the list of entries', function () {
+
+        myApp.L.log('some log-entry...', 'some type', 'some context');
+
+        myApp.L.logentries.should.not.be.empty;
+    });
+
+    it('get() retrieves the (complete) list of log-entries', function () {
+
+        myApp.L.get().should.not.be.empty;
+    });
+
+    it('get(n) retrieves the n-th (zero-indexed) entry from the list of log-entries', function () {
+        var lastentry = myApp.L.logentries.length - 1;
+        myApp.L.get(lastentry).should.not.be.undefined;
+    });
+});
+
+describe('(Data) Namespace module', function () {
+
+    it('Namespace object is present within application namespace/class/object', function () {
+
+        myApp.Namespace.should.be.an('object');
+    });
+
+    it('Shortcut returns Namespace object', function () {
+
+        myApp.NS.should.be.an('object');
+    });
+});
+
+describe('EventManager module', function () {
+
+    it('EventManager class is present', function () {
+
+        Siteapp.sys.EventManager.should.be.a('function');
+    });
+
+    it('Instanciating EventManager class creates an object', function () {
+        var _events = new Siteapp.sys.EventManager();
+
+        _events.should.be.an('object');
+        _events.should.be.instanceOf(Siteapp.sys.EventManager);
+    });
 });

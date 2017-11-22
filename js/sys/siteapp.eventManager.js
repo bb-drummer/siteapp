@@ -1,7 +1,7 @@
 /**
- * [earthTheme] - multi-purpose application & CMS theme
+ * [Siteapp] - multi-purpose frontend application
  * 
- * earthTheme event dispatcher/manager
+ * Siteapp event dispatcher/manager
  * 
  * A simple event dispatcher/manager to help creating event-driven components 
  * which are not attached to a DOM object.
@@ -99,12 +99,15 @@
  *   ```
  * 
  * 
- * @package     [earthTheme]
- * @subpackage  [earthTheme] core
+ * @package     [Siteapp]
+ * @subpackage  [Siteapp] core
  * @author      Björn Bartels <coding@bjoernbartels.earth>
  * @link        https://gitlab.bjoernbartels.earth/groups/themes
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
  * @copyright   copyright (c) 2016 Björn Bartels <coding@bjoernbartels.earth>
+ * 
+ * @namespace   Siteapp
+ * @module      Siteapp
  */
 const EventManager = class EventManager {
 

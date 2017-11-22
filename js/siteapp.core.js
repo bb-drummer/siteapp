@@ -568,7 +568,7 @@ const Siteapp = class Siteapp {
      * Logger alias.
      */
     get L () { 
-        return this.Logger;
+        return this.Log;
     }
     
     
@@ -583,6 +583,7 @@ const Siteapp = class Siteapp {
     /**
      * [BC] Siteapp.plugin alias for ModuleManager.registerModule
      * @function
+     * @deprecated
      * @see ModuleManager.registerModule
      */
     plugin (_plugin, name) {
@@ -592,6 +593,7 @@ const Siteapp = class Siteapp {
     /**
      * [BC] Siteapp.registerPlugin alias for ModuleManager.initializeModule
      * @function
+     * @deprecated
      * @see ModuleManager.initializeModule
      */
     registerPlugin (plugin, name) {
@@ -601,6 +603,7 @@ const Siteapp = class Siteapp {
     /**
      * [BC] Siteapp.unregisterPlugin alias for ModuleManager.destroyModule
      * @function
+     * @deprecated
      * @see ModuleManager.destroyModule
      */
     unregisterPlugin (plugin) {

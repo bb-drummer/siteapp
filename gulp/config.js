@@ -80,7 +80,8 @@ module.exports = {
 
   // Tests
   TEST_JS_FILES: [
-    'test/javascript/components/**/*.js',
-    'test/javascript/util/**/*.js'
+	'test/javascript/setup.js',
+	'test/javascript/components/*/**/*.js',
+    'test/javascript/util/*/**/*.js'
   ]
 };

@@ -1,4 +1,4 @@
-describe('Keyboard util', function() {
+describe('Keyboard event module', function() {
   /**
    * Creates a dummy event to parse.
    * Uses jQuery Event class constructor.
