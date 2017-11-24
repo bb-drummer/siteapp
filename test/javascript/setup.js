@@ -1,4 +1,4 @@
-class MyApp extends window.Siteapp {};
+class MyApp extends Siteapp {};
 
 var myApp = new MyApp();
 
