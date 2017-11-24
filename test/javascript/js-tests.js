@@ -22,7 +22,11 @@ var myApp = new MyApp();
 
 window.Siteapp = Siteapp;
 window.MyApp = MyApp;
-window.myApp = myApp;
+
+myApp.addToGlobal(window);
+myApp.addToGlobal($);
+
+//window.myApp   = myApp;
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -443,19 +447,11 @@ describe('Log module', function () {
         myApp.L.get(lastentry).should.not.be.undefined;
     });
 });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-describe('(Data) Namespace module', function () {
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-    it('Namespace object is present within application namespace/class/object', function () {
-
-        myApp.Namespace.should.be.an('object');
-    });
-
-    it('Shortcut returns Namespace object', function () {
-
-        myApp.NS.should.be.an('object');
-    });
-});
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 describe('EventManager module', function () {
 
@@ -469,5 +465,64 @@ describe('EventManager module', function () {
 
         _events.should.be.an('object');
         _events.should.be.instanceOf(Siteapp.sys.EventManager);
+    });
+
+    it('on() delegates a custom event attached to custom module', function () {
+        var MyEvents = function (_Siteapp$Module) {
+            _inherits(MyEvents, _Siteapp$Module);
+
+            function MyEvents(element, options, app) {
+                _classCallCheck(this, MyEvents);
+
+                var _this = _possibleConstructorReturn(this, (MyEvents.__proto__ || Object.getPrototypeOf(MyEvents)).call(this, element, options, app));
+
+                _this.events = new Siteapp.sys.EventManager(_this);
+
+                _this.manager.initialize(_this);
+
+                _this.on('my-trigger', function () {
+
+                    this.should.be.instanceOf(Siteapp.Module);
+
+                    this.event_was_triggered = true;
+                });
+                return _this;
+            }
+
+            return MyEvents;
+        }(Siteapp.Module);
+
+        myApp.Modules.register(MyEvents, 'MyEvents');
+
+        myApp.Modules.MyEvents.should.be.a('function');
+
+        var $el = $('<div data-siteapp-my-events></div>');
+        $('body').append($el);
+        myApp.run();
+
+        var plgin = $('[data-siteapp-my-events]').data('siteappPlugin');
+
+        plgin.events._getEvent('my-trigger').should.be.a('array');
+        plgin.events._getEvent('my-trigger').length.should.not.equal(0);
+    });
+
+    it('trigger() fires a custom event attached to a custom module', function () {
+
+        var plgin = $('[data-siteapp-my-events]').data('siteappPlugin');
+
+        plgin.trigger('my-trigger');
+
+        plgin.event_was_triggered.should.be.a('boolean');
+        plgin.event_was_triggered.should.be.true;
+    });
+
+    it('off() detaches a custom event from a custom module', function () {
+
+        var plgin = $('[data-siteapp-my-events]').data('siteappPlugin');
+
+        plgin.off('my-trigger');
+        var event = plgin.events._getEvent('my-trigger');
+
+        (event === null).should.be.true;
     });
 });

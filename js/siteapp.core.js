@@ -215,11 +215,6 @@ const Siteapp = class Siteapp {
         	this.Plugin._app = this;
         }
         
-        // namespace storage
-        if (typeof this.Namespace != 'undefined') {
-        	this.Namespace._ns  = this.appName;
-        	this.Namespace._app = this;
-        }
     }
 
     /**
@@ -776,10 +771,10 @@ Siteapp.prototype.utilities = {
 /**
  * alias for utility namespace
  */
-Siteapp.prototype.sys = Siteapp.prototype.utilities;
+Siteapp.prototype.sys  = Siteapp.prototype.utilities;
 // map to 'own property'
 Siteapp.utilities = Siteapp.prototype.utilities;
-Siteapp.sys = Siteapp.prototype.utilities;
+Siteapp.sys       = Siteapp.prototype.utilities;
 
 
 

@@ -18,16 +18,13 @@ Siteapp.Triggers   = Siteapp.prototype.Triggers;
 
 //Extra Core Components: Storage/Module-Managment, Log, Debug
 import { Exception } from '../sys/siteapp.exception';
-import { Namespace } from '../sys/siteapp.namespace';
 import { Debugger }  from '../sys/siteapp.debug';
 import { Log }       from '../sys/siteapp.log';
  
-Siteapp.prototype.Namespace = Namespace;
 Siteapp.prototype.Exception = Exception;
 Siteapp.prototype.Debugger  = Debugger;
 Siteapp.prototype.Log       = Log;
  
-Siteapp.Namespace = Siteapp.prototype.Namespace;
 Siteapp.Exception = Siteapp.prototype.Exception;
 Siteapp.Debugger  = Siteapp.prototype.Debugger;
 Siteapp.Log       = Siteapp.prototype.Log;

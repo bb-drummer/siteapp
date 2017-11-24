@@ -121,7 +121,7 @@ const Module = class Module {
 	    	this.application = app;
 	    }
 	    
-	    var moduleName = Siteapp.sys.functionName(this);
+	    var moduleName = Siteapp.sys.hyphenate( Siteapp.sys.functionName(this) );
 	    if (!this.uuid) {
 		    this.uuid = moduleName+'-'+Siteapp.sys.genUUID(6);
 	    }

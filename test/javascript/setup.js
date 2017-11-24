@@ -4,4 +4,8 @@ var myApp = new MyApp();
 
 window.Siteapp = Siteapp;
 window.MyApp   = MyApp;
-window.myApp   = myApp;
+
+myApp.addToGlobal(window);
+myApp.addToGlobal($);
+
+//window.myApp   = myApp;

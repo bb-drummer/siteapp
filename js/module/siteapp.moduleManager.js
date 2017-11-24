@@ -161,7 +161,7 @@ const ModuleManager = class ModuleManager {
     registerModule (_module, name) {
         // Object key to use when adding to registry
         // Examples: Siteapp.Object1, Siteapp.Object2
-        var className    = (name || this.functionName(_module));
+        var className    = (typeof name != 'undefined') ? name : this.functionName(_module);
         // Object key to use when storing the module, also used to create the
         // identifying data attribute for the module
         // Examples: data-objecttriggername1, data-objecttriggername2
@@ -205,7 +205,7 @@ const ModuleManager = class ModuleManager {
      * @fires Module#init
      */
     initializeModule (_module, name) {
-        var moduleName = name ? this.hyphenate(name) : this.functionName(_module.constructor).toLowerCase();
+        var moduleName = (typeof name != 'undefined') ? this.hyphenate(name) : this.hyphenate(this.functionName(_module.constructor));
         var attrName   = moduleName;
         if (this.options.namespacedModuleTriggers) {
         	attrName   = this.application.appName+'-'+attrName;

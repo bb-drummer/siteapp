@@ -43,11 +43,13 @@ Siteapp.ModuleFactory           = ModuleFactory;
 Siteapp.prototype.ModuleManager = ModuleManager;
 Siteapp.ModuleManager           = ModuleManager;
 
-
 /* Foundation compatiblitiy mappings */
 Siteapp.prototype.rtl           = Siteapp.prototype.utilities.rtl;
 Siteapp.prototype.GetYoDigits   = Siteapp.prototype.utilities.genUUID;
 Siteapp.prototype.transitionend = Siteapp.prototype.utilities.transitionend;
+Siteapp.prototype.util          = Siteapp.prototype.utilities;
+Siteapp.util                    = Siteapp.prototype.utilities;
+
 //'Foundation.Plugin' alias for 'Siteapp.Module'
 Siteapp.prototype.Plugin        = Siteapp.Module;
 Siteapp.Plugin                  = Siteapp.prototype.Plugin;
