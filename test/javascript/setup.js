@@ -1,9 +1,9 @@
-class MyApp extends Siteapp {};
+class MyApp extends window.Siteapp {};
 
 var myApp = new MyApp();
 
-window.Siteapp = Siteapp;
-window.MyApp   = MyApp;
+//window.Siteapp = Siteapp;
+//window.MyApp   = MyApp;
 
 myApp.addToGlobal(window);
 myApp.addToGlobal($);
