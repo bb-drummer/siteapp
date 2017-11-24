@@ -75,7 +75,7 @@ var Debugger = {
 		if ( (typeof console[data.type] == 'function') ) {
 			console[data.type](txt);
 		} else {
-			console.log(txt);
+			//console.//log(txt);
 		}
 		return (this);
 	},

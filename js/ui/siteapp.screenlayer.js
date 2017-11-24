@@ -113,7 +113,7 @@ const Screenlayer = class Screenlayer extends Module {
 		super(element, option);
     	
 		if (Siteapp.sys.functionName(this) == 'Screenlayer') {
-			console.log('initializing default screenlayer module...');
+			//console.//log('initializing default screenlayer module...');
 		}
 	}
 	

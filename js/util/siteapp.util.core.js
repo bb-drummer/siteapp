@@ -66,7 +66,7 @@ function transitionend($elem){
  *   secureProperties( obj, ['a'] );
  *   
  *   obj.a = 'y';
- *   console.log(obj.a); // => "x"
+ *   //console.//log(obj.a); // => "x"
  *   ```
  *   
  * or setting such property will throw an error:

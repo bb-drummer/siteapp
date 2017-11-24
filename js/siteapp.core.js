@@ -259,7 +259,7 @@ const Siteapp = class Siteapp {
         	global[appId] = this;
         	
     	}
-    	console.log('appid:', appId, global[appId]);
+    	//console.//log('appid:', appId, global[appId]);
     	
     	if (add$Shortcut !== false) {
     		var shortcut = "$"+String(appId).charAt(0).toUpperCase();
@@ -371,7 +371,7 @@ const Siteapp = class Siteapp {
      * @see ModuleManager.reInit
      */
     reInit (plugins) {
-    	console.log('app re-init:', this.utilities.functionName(this));
+    	//console.//log('app re-init:', this.utilities.functionName(this));
     	
     	// re-init (generic) modules
     	if (this.Modules && !this.options.Modules) {
@@ -392,7 +392,7 @@ const Siteapp = class Siteapp {
      * @see ModuleManager.reflow
      */
     reflow (elem, plugins) {
-    	console.log('app reflow:', this.utilities.functionName(this));
+    	//console.//log('app reflow:', this.utilities.functionName(this));
     	
     	// reflow (generic) modules
     	if (this.Modules && !this.options.disableModules) {
@@ -495,7 +495,7 @@ const Siteapp = class Siteapp {
 	            }
 	        } else if ($element.length > 0) {
 	        	// error for no class or no method, but only if elements were explicitly selected
-	   	 	    console.log('plugin method:', plugClass, method, $element);
+	   	 	    //console.//log('plugin method:', plugClass, method, $element);
 	            throw new ReferenceError("We're sorry, '" + method + "' is not an available method for " + (plugClass ? $app.utilities.functionName(plugClass) : 'this element') + '.');
 	        }
 	    } else {

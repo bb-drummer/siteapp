@@ -179,7 +179,7 @@ const ModuleFactory = class ModuleFactory {
 		}
 	    
 	    try {
-        	console.log('ModuleFactory : init', this.options);
+        	//console.//log('ModuleFactory : init', this.options);
 
     		this._dependencies = this.options.deps;
     		this._module       = this.options.module;
@@ -214,14 +214,14 @@ const ModuleFactory = class ModuleFactory {
         }
 
         var $factory = this;
-    	console.log('ComponentFactory::inject : injecting...', _dependencies, _module, _callback);
+    	//console.//log('ComponentFactory::inject : injecting...', _dependencies, _module, _callback);
     	if (_dependencies.length > 0) {
     		if ( !this._allowURIs(_dependencies) ) {
     			throw new Error('SECURITY ALERT: One or more of the dependencies requested are not allowed to be included!');
     		}
         	requirejs(_dependencies, () => {
 
-            	console.log('ComponentFactory::inject : dependencies injected');
+            	//console.//log('ComponentFactory::inject : dependencies injected');
             	
         		$factory.injectModule( _module, _callback );
         		
@@ -257,7 +257,7 @@ const ModuleFactory = class ModuleFactory {
 		
     	requirejs([_module], () => {
     		
-        	console.log('ComponentFactory::injectModule : module injected');
+        	//console.//log('ComponentFactory::injectModule : module injected');
     		
         	// destroy factory instance
     		$factory.destroy();

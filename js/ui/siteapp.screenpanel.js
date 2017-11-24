@@ -150,7 +150,7 @@ const Screenpanel = class Screenpanel extends Module {
 		super(element, option);
     	
 		if (Siteapp.sys.functionName(this) == 'Screenpanel') {
-			console.log('initializing screenpanel module...');
+			//console.//log('initializing screenpanel module...');
 		}
 	}
 	

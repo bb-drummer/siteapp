@@ -198,7 +198,7 @@ Triggers.Initializers.addMutationEventsListener = function($elem) {
         break;
 
       case "childList":
-    	//console.log('mutation closest:', $target.closest("[data-mutate]"));
+    	////console.//log('mutation closest:', $target.closest("[data-mutate]"));
     	// init newly inserted components
         $target.closest("[data-mutate]").attr("data-events","mutate");
         $target.closest("[data-mutate]").triggerHandler('mutateme.'+Triggers._ns+'.trigger', [$target.closest("[data-mutate]")]);

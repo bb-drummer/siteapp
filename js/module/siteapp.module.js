@@ -55,7 +55,7 @@ const Module = class Module {
      * @function
      */
     _init () {
-    	console.log ('module init:', this.manager.functionName(this));
+    	//console.//log ('module init:', this.manager.functionName(this));
 	}
     
     /**
@@ -74,7 +74,7 @@ const Module = class Module {
      * @function
      */
     _destroy () {
-    	console.log ('module destroy:', this.manager.functionName(this));
+    	//console.//log ('module destroy:', this.manager.functionName(this));
 	}
     
     /**
@@ -84,7 +84,7 @@ const Module = class Module {
      * @function
      */
     reflow() {
-    	console.log ('module reflow:', this.manager.functionName(this));
+    	//console.//log ('module reflow:', this.manager.functionName(this));
 	}
     
     // ... and add your own propertiesfrom here...

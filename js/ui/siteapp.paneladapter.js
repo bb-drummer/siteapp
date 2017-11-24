@@ -45,7 +45,7 @@ const Paneladapter = class Paneladapter extends Module {
         
         this.events = new Siteapp.sys.EventManager(this);
         
-        console.log('constructing a panel adapter ...');
+        //console.//log('constructing a panel adapter ...');
 
     }
     
@@ -178,7 +178,7 @@ const Paneladapter = class Paneladapter extends Module {
         var $panel = this.$container.find(panel);
       
         if (!$panel) {
-            console.log('panel to remove not found:', panel);
+            //console.//log('panel to remove not found:', panel);
             return;
         }
 

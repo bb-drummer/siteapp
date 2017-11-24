@@ -120,7 +120,7 @@ const Keyboard = {
 
     register (namespace, cmds) {
         commands[namespace] = cmds;
-        console.log('registered keyboard component:', namespace, cmds, commands);
+        //console.//log('registered keyboard component:', namespace, cmds, commands);
     },
 
 

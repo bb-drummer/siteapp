@@ -25,7 +25,7 @@
  *   Per function expression...
  *   ```
  *   myTool.on('someevent', function eventHandler(data) { 
- *       console.log('"someevent" was triggered:', data, this);
+ *       //console.//log('"someevent" was triggered:', data, this);
  *   });  
  *   ```
  *   'this' will reference the object 'myTool', which the event manager is attached to.
@@ -33,7 +33,7 @@
  *   Per arrow function...
  *   ```
  *   myTool.on('someevent', (data) => { 
- *       console.log('"someevent" was triggered:', data, this);
+ *       //console.//log('"someevent" was triggered:', data, this);
  *   });  
  *   ```
  *   'this' will reference the global object, for example 'window'.
@@ -45,7 +45,7 @@
  *   ```
  *   // at some point in the code...
  *   myTool.on('someevent', (data) => { 
- *       console.log('"someevent" was triggered:', data);
+ *       //console.//log('"someevent" was triggered:', data);
  *       
  *       // this example is static, of cause, you can depend it on your 'data', something like
  *       // `return (data == 'blah');` or similar
@@ -54,7 +54,7 @@
  *   
  *   // later, somewhere else in the code...
  *   myTool.on('someevent', (data) => { 
- *       console.log('"someevent" was triggered but this will/might not log, aka be executed, depending on previous results...');
+ *       //console.//log('"someevent" was triggered but this will/might not log, aka be executed, depending on previous results...');
  *   });  
  *   ```
  *   
@@ -63,17 +63,17 @@
  *   ```
  *   // at some point in the code...
  *   myTool.on('someevent', (data) => { 
- *       console.log('"someevent" was triggered:', data);
+ *       //console.//log('"someevent" was triggered:', data);
  *       
  *       data.msg = 'Beware the dragons !!!';
  *   });  
  *   
  *   // later in that code...
  *   myTool.on('someevent', (data) => { 
- *       console.log('"someevent" was triggered:', data);
+ *       //console.//log('"someevent" was triggered:', data);
  *       
  *       if (data.msg) {
- *           console.log('there is also a message:', data.msg);
+ *           //console.//log('there is also a message:', data.msg);
  *       }
  *   });  
  *   ```

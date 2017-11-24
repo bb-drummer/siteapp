@@ -284,10 +284,10 @@ const Ui = class Ui extends ModuleManager {
         var _this = this;
 
         var keyHandlerMap = {
-            'ESCAPE'     : (e) => { console.log('key event [ESC]:', e, this); } ,
-            'X'          : (e) => { console.log('key event [X]:', e, this); } ,
-            'ALT_CTRL_X' : (e) => { console.log('key event [ALT+CTRL+X]:', e, this); },
-            'META_A'     : (e) => { console.log('key event [CMD+A]:', e, this); } 
+            'ESCAPE'     : (e) => { /*console.//log('key event [ESC]:', e, this);*/ } ,
+            'X'          : (e) => { /*console.//log('key event [X]:', e, this);*/ } ,
+            'ALT_CTRL_X' : (e) => { /*console.//log('key event [ALT+CTRL+X]:', e, this);*/ },
+            'META_A'     : (e) => { /*console.//log('key event [CMD+A]:', e, this);*/ } 
         }
         Siteapp.Keyboard.addKeyHandlers( keyHandlerMap, 'UiKeys'+this._uuid );
     }

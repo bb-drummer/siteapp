@@ -90,4 +90,4 @@ Siteapp.Plugin                  = Siteapp.Module;
 window.Siteapp = Siteapp;
 
 
-export {Siteapp};
+export default Siteapp;

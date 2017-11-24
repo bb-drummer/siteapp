@@ -107,10 +107,10 @@ const ModuleManager = class ModuleManager {
      *   
      */
     initialize ( _module, name ) {
-		console.log('initialize module...', _module);
+		//console.//log('initialize module...', _module);
     	
     	if (_module instanceof Module) {
-    		console.log('...is instance of Module...');
+    		//console.//log('...is instance of Module...');
     		return this.initializeModule(_module, name);
     	}
     }
@@ -126,9 +126,9 @@ const ModuleManager = class ModuleManager {
      * 
      */
     register ( _module, name ) {
-		console.log('register module...', typeof _module);
+		//console.//log('register module...', typeof _module);
     	if (_module instanceof Object) {
-    		console.log('...is instance of Object...');
+    		//console.//log('...is instance of Object...');
     		return this.registerModule(_module, name);
     	}
     }
@@ -141,10 +141,10 @@ const ModuleManager = class ModuleManager {
      * 
      */
     destroy ( _module ) {
-		console.log('destroy module...', _module);
+		//console.//log('destroy module...', _module);
         var moduleName = _module;
     	if (_module instanceof Module) {
-    		console.log('...is instance of Module...');
+    		//console.//log('...is instance of Module...');
             moduleName = this.hyphenate(this.functionName(_module.$element.data(this.application.appName+'Plugin').constructor));
         	if (typeof this._modules[this.application.appName+'-'+moduleName] != 'undefined') {
         		return this.destroyModule(_module);
@@ -280,7 +280,7 @@ const ModuleManager = class ModuleManager {
      * @default If no argument is passed, reflow all currently active modules.
      */
      reInit (modules) {
-     	 console.log('module manager re-init:', this.functionName(this));
+     	 //console.//log('module manager re-init:', this.functionName(this));
          var isJQ = modules instanceof $;
          var $app = this,
 	         _namespace = $app.application.appName
@@ -297,16 +297,16 @@ const ModuleManager = class ModuleManager {
                     fns = {
 	                    'object' : function (_modules) {
 	                     _modules.forEach(function (p) {
-	                    	    console.log('(re)init...:', _namespace, p, $('[data-'+ p +']'), ($('[data-'+ p +']'))[_namespace]);
+	                    	    //console.//log('(re)init...:', _namespace, p, $('[data-'+ p +']'), ($('[data-'+ p +']'))[_namespace]);
 	                            $('[data-'+ p +']')[_namespace]('_init');
 	                        });
 	                    },
 	                    'string' : function () {
-                    	    console.log('(re)init...:', _namespace, modules, $('[data-'+ modules +']'), ($('[data-'+ modules +']'))[_namespace]);
+                    	    //console.//log('(re)init...:', _namespace, modules, $('[data-'+ modules +']'), ($('[data-'+ modules +']'))[_namespace]);
 	                        $('[data-'+ modules +']')[_namespace]('_init');
 	                    },
 	                    'undefined' : function () {
-                    	    console.log('(re)init...:', _namespace, '*all*', $('[data-'+ modules +']'), ($('[data-'+ modules +']'))[_namespace]);
+                    	    //console.//log('(re)init...:', _namespace, '*all*', $('[data-'+ modules +']'), ($('[data-'+ modules +']'))[_namespace]);
 	                        this['object'](Object.keys($this._modules));
 	                    }
 	                }
@@ -330,8 +330,8 @@ const ModuleManager = class ModuleManager {
      *                                 out to initialize everything.
      */
     reflow (elem, modules) {
-    	console.log('module manager reflow:', this.functionName(this), elem);
-    	console.log('modules:', this._modules, modules);
+    	//console.//log('module manager reflow:', this.functionName(this), elem);
+    	//console.//log('modules:', this._modules, modules);
         
     	var onlySpecificModules = false;
         // If modules is undefined, just grab everything
@@ -356,13 +356,13 @@ const ModuleManager = class ModuleManager {
             // Get the current module
             var module = $moduleManager._modules[name];
 
-        	console.log('trying to reflow...: ', name);
+        	//console.//log('trying to reflow...: ', name);
         	
             // Localize the search to all elements inside elem, as well as elem 
             // itself, unless elem === document
             var $elem = $(elem).find('[data-'+name+']').addBack('[data-'+name+']');
             
-        	console.log('elements...: ', $elem.length, '[data-'+name+']');
+        	//console.//log('elements...: ', $elem.length, '[data-'+name+']');
 
             // For each module found, initialize it
             $elem.each(function() {
@@ -371,7 +371,7 @@ const ModuleManager = class ModuleManager {
                 ;
                 // Don't double-dip on modules, invoke 'reFlow' if available
                 if ($el.data($moduleManager.application.appName+'Plugin')) {
-                	console.log('reflowing...: ', name, $el);
+                	//console.//log('reflowing...: ', name, $el);
                 	
                 	var plgIn = $el.data($moduleManager.application.appName+'Plugin');
                 	if ( plgIn.reflow ) { plgIn.reflow(); }
@@ -390,10 +390,10 @@ const ModuleManager = class ModuleManager {
                     });
                 }
                 try {
-                	console.log('new instance...: ', $moduleManager.functionName(module), $el);
+                	//console.//log('new instance...: ', $moduleManager.functionName(module), $el);
                     $el.data($moduleManager.application.appName+'Plugin', new module($el, opts));
                 } catch(er) {
-                    console.log('ERROR:', er);
+                    //console.//log('ERROR:', er);
                 	throw new ModuleManagerException(er.message);
                 } finally {
                     return;

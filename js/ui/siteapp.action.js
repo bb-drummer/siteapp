@@ -56,7 +56,7 @@ const Action = class Action extends Module {
         this.options = $.extend({}, ActionConfig, this.$element.data(), this.options);
 		Siteapp.sys.secureProperties(this.options, ['removable']);
         
-    	console.log('constructing a navigational action item ...');
+    	//console.//log('constructing a navigational action item ...');
     	
     	this._init();
         this.manager.initialize(this);
@@ -120,7 +120,7 @@ const Action = class Action extends Module {
 
 		   				// show string data with panel adapter
 		            	if (typeof _data != 'object') {
-		            		console.log('panel body:', $(_data), $(_data).find('body') );
+		            		//console.//log('panel body:', $(_data), $(_data).find('body') );
 			        	    body   = ( $(_data).find('body').length == 0 ) ? _data : $(_data).find('body').html(); 
 			        	    
 				        	//$target.panelAdapter.addPanel($item);
