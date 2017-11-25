@@ -15,6 +15,8 @@
  * @namespace   Siteapp
  * @module      Siteapp.ModuleManager
  */
+/** global: Siteapp */
+/** global: Siteapp_ModuleManager_DEFAULTS */
 
 "use strict";
 

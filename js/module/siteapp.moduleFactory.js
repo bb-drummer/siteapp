@@ -93,6 +93,8 @@
  * @module      Siteapp.ModuleFactory
  * @abstract
  */
+/** global: Siteapp */
+/** global: ModuleFactoryDefaults */
 
 import {Exception}     from '../sys/siteapp.exception';
 

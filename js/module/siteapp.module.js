@@ -14,12 +14,11 @@
  * @module      Siteapp.Module
  * @abstract
  */
-	
+/** global: Siteapp */
+/** global: Siteapp_Module_DEFAULTS */
+/** global: ModuleManager */
 
 import {Exception} from '../sys/siteapp.exception';
-
-const Siteapp_Module_DEFAULTS = {
-};
 
 class ModuleException extends Exception {
 
@@ -27,6 +26,10 @@ class ModuleException extends Exception {
 		return "SiteappModuleException";
 	}
 	
+};
+
+const Siteapp_Module_DEFAULTS = {
+		
 };
 
 /**
