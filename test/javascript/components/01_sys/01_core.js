@@ -1,3 +1,6 @@
+var Siteapp;
+var testApp;
+
 var $el = $('<div data-siteapp-myplugin></div>');
 var myObj;
 

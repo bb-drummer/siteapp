@@ -1,7 +1,4 @@
 //import Siteapp from '../../dist/js/siteapp.min.js';
-var Siteapp;
-var testApp;
-
 /*
 
 class TestApp extends Siteapp {};

@@ -1,23 +1,3 @@
-//import Siteapp from '../../dist/js/siteapp.min.js';
-var Siteapp;
-var testApp;
-
-/*
-
-class TestApp extends Siteapp {};
-
-var testApp = new TestApp();
-
-//window.Siteapp = Siteapp;
-//window.MyApp   = MyApp;
-
-testApp.addToGlobal(window);
-testApp.addToJquery($);
-testApp.addPluginShortcut(window);
-
-//window.testApp   = testApp;
-
-*/
 !function (e) {
   function __webpack_require__(n) {
     if (t[n]) return t[n].exports;var i = t[n] = { i: n, l: !1, exports: {} };return e[n].call(i.exports, i, i.exports, __webpack_require__), i.l = !0, i.exports;
@@ -1270,6 +1250,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Siteapp;
+var testApp;
 
 var $el = $('<div data-siteapp-myplugin></div>');
 var myObj;
