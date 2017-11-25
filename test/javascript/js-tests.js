@@ -1,3 +1,26 @@
+//import Siteapp from '../../dist/js/siteapp.min.js';
+if (!window) {
+	var window = {};
+}
+//var Siteapp = window.Siteapp;
+//var testApp = window.testApp;
+
+/*
+
+class TestApp extends Siteapp {};
+
+var testApp = new TestApp();
+
+//window.Siteapp = Siteapp;
+//window.MyApp   = MyApp;
+
+testApp.addToGlobal(window);
+testApp.addToJquery($);
+testApp.addPluginShortcut(window);
+
+//window.testApp   = testApp;
+
+*/
 !function (e) {
   function __webpack_require__(n) {
     if (t[n]) return t[n].exports;var i = t[n] = { i: n, l: !1, exports: {} };return e[n].call(i.exports, i, i.exports, __webpack_require__), i.l = !0, i.exports;
@@ -1245,26 +1268,6 @@
 },,,,, function (e, t, n) {
   e.exports = n(24);
 }]);
-//import Siteapp from '../../dist/js/siteapp.min.js';
-var Siteapp = window.Siteapp;
-var testApp = window.testApp;
-
-/*
-
-class TestApp extends Siteapp {};
-
-var testApp = new TestApp();
-
-//window.Siteapp = Siteapp;
-//window.MyApp   = MyApp;
-
-testApp.addToGlobal(window);
-testApp.addToJquery($);
-testApp.addPluginShortcut(window);
-
-//window.testApp   = testApp;
-
-*/
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
