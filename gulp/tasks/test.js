@@ -28,7 +28,7 @@ gulp.task('test:reload', function(done) {
   done();
 });
 
-gulp.task('test:transpile-js', ['javascript:siteapp', 'javascript:deps'], function() {
+gulp.task('test:transpile-js', ['javascript:siteapp', 'javascript:deps', 'deploy'], function() {
   rimraf('test/javascript/js-tests.js');
   
   return gulp.src(CONFIG.TEST_JS_FILES)

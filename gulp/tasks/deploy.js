@@ -18,7 +18,7 @@ var CURRENT_VERSION = require('../../package.json').version;
 var NEXT_VERSION;
 
 const uglifyConfig= {
-  	  compress: false /* {
+  	  compress: true /* {
 		    booleans         : true,
 		    cascade          : true,
 		    collapse_vars    : !true,
