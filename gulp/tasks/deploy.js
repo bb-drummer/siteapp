@@ -18,7 +18,7 @@ var CURRENT_VERSION = require('../../package.json').version;
 var NEXT_VERSION;
 
 const uglifyConfig= {
-  	  compress: {
+  	  compress: false /* {
 		    booleans         : true,
 		    cascade          : true,
 		    collapse_vars    : !true,
@@ -45,11 +45,11 @@ const uglifyConfig= {
 		    properties       : !true,
 		    pure_getters     : false,
 		    pure_funcs       : null,
-		    reduce_vars      : true,
+		    reduce_vars      : !true,
 		    sequences        : true,
 		    side_effects     : true,
 		    switches         : true,
-		    top_retain       : null,
+		    top_retain       : ['Siteapp'],
 		    //typeofs          : true,
 		    unsafe           : false,
 		    unsafe_comps     : false,
@@ -57,10 +57,10 @@ const uglifyConfig= {
 		    unsafe_math      : false,
 		    unsafe_proto     : false,
 		    unsafe_regexp    : false,
-		    unused           : true,
+		    unused           : !true,
 		    warnings         : false
-	  }/*,
-	  mangle: {
+	  }*/,
+	  mangle: true /*{
 		    keep_fnames      : !false,
 		  
 	  }*/
