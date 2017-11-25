@@ -1,4 +1,8 @@
 //import Siteapp from '../../dist/js/siteapp.min.js';
+var Siteapp;
+var testApp;
+
+/*
 
 class TestApp extends Siteapp {};
 
@@ -12,3 +16,5 @@ testApp.addToJquery($);
 testApp.addPluginShortcut(window);
 
 //window.testApp   = testApp;
+
+*/

@@ -80,8 +80,8 @@ module.exports = {
 
   // Tests
   TEST_JS_FILES: [
+    'test/javascript/setup.js',
 	'dist/js/siteapp-testapp.min.js',
-	//'test/javascript/setup.js',
 	'test/javascript/components/*/**/*.js',
     'test/javascript/util/*/**/*.js'
   ]

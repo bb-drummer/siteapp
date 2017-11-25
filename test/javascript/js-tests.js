@@ -1,3 +1,23 @@
+//import Siteapp from '../../dist/js/siteapp.min.js';
+var Siteapp;
+var testApp;
+
+/*
+
+class TestApp extends Siteapp {};
+
+var testApp = new TestApp();
+
+//window.Siteapp = Siteapp;
+//window.MyApp   = MyApp;
+
+testApp.addToGlobal(window);
+testApp.addToJquery($);
+testApp.addPluginShortcut(window);
+
+//window.testApp   = testApp;
+
+*/
 !function (e) {
   function __webpack_require__(n) {
     if (t[n]) return t[n].exports;var i = t[n] = { i: n, l: !1, exports: {} };return e[n].call(i.exports, i, i.exports, __webpack_require__), i.l = !0, i.exports;
