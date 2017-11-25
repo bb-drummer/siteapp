@@ -1241,18 +1241,35 @@
       return _classCallCheck(this, TestApp), _possibleConstructorReturn(this, (TestApp.__proto__ || Object.getPrototypeOf(TestApp)).apply(this, arguments));
     }return _inherits(TestApp, e), TestApp;
   }(i["default"]),
-      r = new a();r.addToGlobal(window), r.addToJquery($), r.addPluginShortcut(window), window.testApp = r;
+      r = new a();r.addToGlobal(window), r.addToJquery($), r.addPluginShortcut(window), window.Siteapp = i["default"], window.testApp = r;
 },,,,, function (e, t, n) {
   e.exports = n(24);
 }]);
+//import Siteapp from '../../dist/js/siteapp.min.js';
+var Siteapp = window.Siteapp;
+var testApp = window.testApp;
+
+/*
+
+class TestApp extends Siteapp {};
+
+var testApp = new TestApp();
+
+//window.Siteapp = Siteapp;
+//window.MyApp   = MyApp;
+
+testApp.addToGlobal(window);
+testApp.addToJquery($);
+testApp.addPluginShortcut(window);
+
+//window.testApp   = testApp;
+
+*/
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Siteapp;
-var testApp;
 
 var $el = $('<div data-siteapp-myplugin></div>');
 var myObj;

@@ -17,6 +17,6 @@ testApp.addToJquery($);
 testApp.addPluginShortcut(window);
 
 
-//window.Siteapp = Siteapp;
+window.Siteapp = Siteapp;
 window.testApp = testApp;
 
