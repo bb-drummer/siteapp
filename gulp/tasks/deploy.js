@@ -59,11 +59,11 @@ const uglifyConfig= {
 		    unsafe_regexp    : false,
 		    unused           : true,
 		    warnings         : false
-	  },
+	  }/*,
 	  mangle: {
 		    keep_fnames      : !false,
 		  
-	  }
+	  }*/
 };
 
 gulp.task('deploy', function(cb) {
