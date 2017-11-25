@@ -13,6 +13,10 @@
  * @namespace   Siteapp
  * @module      Siteapp.Ui.Action
  */
+/** global: Siteapp */
+/** global: Module */
+/** global: ActionConfig */
+
 import Module        from '../module/siteapp.module';
 	
 const ActionConfig = {
@@ -50,8 +54,8 @@ const Action = class Action extends Module {
      * @param {jQuery} element - jQuery object to apply the module to.
      * @param {Object} options - Overrides to the default module settings.
      */
-	constructor (element, option) {
-		super(element, option);
+	constructor (element, options) {
+		super(element, options);
 		
         this.options = $.extend({}, ActionConfig, this.$element.data(), this.options);
 		Siteapp.sys.secureProperties(this.options, ['removable']);

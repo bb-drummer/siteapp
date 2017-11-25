@@ -13,6 +13,9 @@
  * @namespace   Siteapp
  * @module      Siteapp.Ui.Paneladapter
  */
+/** global: Siteapp */
+/** global: Module */
+/** global: PaneladapterConfig_DEFAULTS */
 import Module from '../module/siteapp.module';
 
 const PaneladapterConfig_DEFAULTS = {
@@ -131,7 +134,7 @@ const Paneladapter = class Paneladapter extends Module {
      * 
 	 * @function
 	 * @param {jQuery|HTMLElement} panel
-	 * @param {Boolean} $append2active
+	 * @param {Boolean} append2active
 	 * @fires   Paneladapter#addpanel
      */
     addPanel ( panel, append2active ) {

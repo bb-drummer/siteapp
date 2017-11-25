@@ -94,6 +94,8 @@
  * @abstract
  */
 /** global: Siteapp */
+/** global: Module */
+/** global: ModuleManager */
 /** global: ModuleFactoryDefaults */
 
 import {Exception}     from '../sys/siteapp.exception';
@@ -176,32 +178,32 @@ const ModuleFactory = class ModuleFactory {
 		this._module       = null;
 		this._callback     = null;
 		
-		if (typeof option == 'object') {
+		if (typeof options == 'object') {
 		    this.options = $.extend({}, this.options, options);
 		}
 	    
 	    try {
-        	//console.//log('ModuleFactory : init', this.options);
 
     		this._dependencies = this.options.deps;
     		this._module       = this.options.module;
     		this._callback     = this.options.callback;
     		
             this.inject();
+            
 	    } catch (ex) {
         	console.error('ModuleFactoryError : '+ex.message, this.options);
     		throw new ModuleFactoryException('ModuleFactoryError loading module: '+ex.message);	
 	    } finally {
-	    	return;
+	    	
 	    }
         
     }
 	
 	/**
 	 * inject dependencies and module into page via 'require'
-	 * @param {Array|String} dependencies - module dependency identifiers or paths to inject
-	 * @param {String} module - module identifier or module path to inject.
-	 * @param {function|String} callback - optional callback function or name of registered namespace 'func'
+	 * @param {Array|String} _dependencies - module dependency identifiers or paths to inject
+	 * @param {String} _module - module identifier or module path to inject.
+	 * @param {function|String} _callback - optional callback function or name of registered namespace 'func'
 	 */
     inject ( _dependencies, _module, _callback ) {
     	if (!_dependencies) { _dependencies = this._dependencies; }
@@ -216,14 +218,12 @@ const ModuleFactory = class ModuleFactory {
         }
 
         var $factory = this;
-    	//console.//log('ComponentFactory::inject : injecting...', _dependencies, _module, _callback);
+
     	if (_dependencies.length > 0) {
     		if ( !this._allowURIs(_dependencies) ) {
     			throw new Error('SECURITY ALERT: One or more of the dependencies requested are not allowed to be included!');
     		}
         	requirejs(_dependencies, () => {
-
-            	//console.//log('ComponentFactory::inject : dependencies injected');
             	
         		$factory.injectModule( _module, _callback );
         		
@@ -237,8 +237,8 @@ const ModuleFactory = class ModuleFactory {
 	
 	/**
 	 * inject actual module code into page via 'require'
-	 * @param {String} module - module identifier or module path to inject.
-	 * @param {function|String} callback - optional callback function or name of registered namespace 'func'
+	 * @param {String} _module - module identifier or module path to inject.
+	 * @param {function|String} _callback - optional callback function or name of registered namespace 'func'
 	 */
     injectModule ( _module, _callback ) {
     	if (!_module)       { _module   = this._module; }
@@ -258,8 +258,6 @@ const ModuleFactory = class ModuleFactory {
 		}
 		
     	requirejs([_module], () => {
-    		
-        	//console.//log('ComponentFactory::injectModule : module injected');
     		
         	// destroy factory instance
     		$factory.destroy();

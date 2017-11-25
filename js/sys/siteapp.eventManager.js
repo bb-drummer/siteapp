@@ -109,6 +109,8 @@
  * @namespace   Siteapp
  * @module      Siteapp
  */
+/** global: Siteapp */
+
 const EventManager = class EventManager {
 
     /**

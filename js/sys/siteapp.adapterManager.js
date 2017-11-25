@@ -19,7 +19,9 @@
  * @namespace   Siteapp
  * @module      Siteapp.AdapterManager
  */
-
+/** global: Siteapp */
+/** global: Siteapp_AdapterManager_VERSION */
+/** global: Siteapp_AdapterManager_DEFAULTS */
 "use strict";
 
 //import Siteapp          from '../siteapp.core';

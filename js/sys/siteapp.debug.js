@@ -13,6 +13,7 @@
  * @namespace   Siteapp
  * @module      Siteapp.Debugger
  */
+/** global: Siteapp */
 
 var Debugger = {
 	/* manage debug data */

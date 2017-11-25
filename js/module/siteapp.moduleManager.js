@@ -17,6 +17,7 @@
  */
 /** global: Siteapp */
 /** global: Siteapp_ModuleManager_DEFAULTS */
+/** global: Siteapp_ModuleManager_VERSION */
 
 "use strict";
 
@@ -124,7 +125,7 @@ const ModuleManager = class ModuleManager {
      * 
      * @function
      * @param {Module} _module - the module to register
-     * @param {name} - the trigger name, so it will reference the 'data' attribute [data-(namespace-)name]
+     * @param {string} name - the trigger name, so it will reference the 'data' attribute [data-(namespace-)name]
      * 
      */
     register ( _module, name ) {
@@ -158,7 +159,10 @@ const ModuleManager = class ModuleManager {
      * Defines a [Siteapp] module/plugin, adding it to the `Siteapp` namespace 
      * and the list of modules to initialize when reflowing.
      * 
-     * @param {Object} module - The constructor of the module.
+     * @function
+     * @param {Object} _module - The constructor of the module.
+     * @param {Object} name - The constructor of the module.
+     * 
      */
     registerModule (_module, name) {
         // Object key to use when adding to registry
@@ -187,7 +191,7 @@ const ModuleManager = class ModuleManager {
         // Add to the application object for Foundation compatiblity
         if ( this.options.mapModulesToApplication ) {
         	var appModule = this.application._plugins[moduleName];
-        	if ( !this.options.overrideRegistered && (typeof appModule != 'undefined')) {v
+        	if ( !this.options.overrideRegistered && (typeof appModule != 'undefined')) {
         		console.warn(`Module registration: A Module with the name "${attrName}" has already been mapped to the application object`);
         	} else {
         		this.application._plugins[moduleName] = this.application[className] = this._modules[moduleName];
@@ -196,13 +200,13 @@ const ModuleManager = class ModuleManager {
     }
     
     /**
-     * @function
      * Populates the _uuids array with pointers to each individual module instance.
      * Adds the `siteappPlugin` data-attribute to programmatically created modules 
      * to allow use of $(selector).Siteapp(method) calls.
      * Also fires the initialization event for each module, consolidating repeditive code.
      * 
-     * @param {Object} module - an instance of a module, usually `this` in context.
+     * @function
+     * @param {Object} _module - an instance of a module, usually `this` in context.
      * @param {String} name - the name of the module, passed as a camelCased string.
      * @fires Module#init
      */
@@ -234,12 +238,12 @@ const ModuleManager = class ModuleManager {
     }
     
     /**
-     * @function
      * Removes the modules uuid from the _uuids array.
      * Removes the siteappPlugin data attribute, as well as the data-module-name attribute.
      * Also fires the destroyed event for the module, consolidating repeditive code.
      * 
-     * @param {Object} module - an instance of a module, usually `this` in context.
+     * @function
+     * @param {Object} _module - an instance of a module, usually `this` in context.
      * @fires Module#destroyed
      */
     destroyModule (_module) {
@@ -272,10 +276,10 @@ const ModuleManager = class ModuleManager {
     }
 
     /**
-     * @function
      * Causes one or more active modules to re-initialize, resetting event listeners, 
      * recalculating positions, etc.
      * 
+     * @function
      * @param {String} modules - optional string of an individual module key, 
      *                           attained by calling `$(element).data('moduleName')`, 
      *                           or string of a module class i.e. `'dropdown'`
@@ -318,8 +322,8 @@ const ModuleManager = class ModuleManager {
         } catch(err) {
             console.error(err);
         } finally {
-            return modules;
         }
+        return modules;
     }
     
     /**
@@ -398,8 +402,8 @@ const ModuleManager = class ModuleManager {
                     //console.//log('ERROR:', er);
                 	throw new ModuleManagerException(er.message);
                 } finally {
-                    return;
                 }
+                return;
             });
         });
         
