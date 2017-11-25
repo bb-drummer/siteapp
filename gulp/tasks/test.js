@@ -32,8 +32,7 @@ gulp.task('test:transpile-js', ['javascript:siteapp', 'javascript:deps'], functi
   rimraf('test/javascript/js-tests.js');
   
   return gulp.src(CONFIG.TEST_JS_FILES)
-  	.pipe(babel()
-  		.on('error', onBabelError))
+  	.pipe(babel())
   	.pipe(concat('js-tests.js'))
   	.pipe(gulp.dest('test/javascript'));
 });

@@ -19,7 +19,7 @@ var Siteapp_VERSION = '0.0.1';
 
 // Global [Siteapp] object
 // This is attached to the window, or used as a module for AMD/Browserify
-let Siteapp = class Siteapp {
+const Siteapp = class Siteapp {
     
     /**
      * Create a new instance of the application.

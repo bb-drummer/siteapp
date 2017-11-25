@@ -1,3 +1,5 @@
+//import Siteapp from '../../dist/js/siteapp.min.js';
+
 class MyApp extends Siteapp {};
 
 var myApp = new MyApp();
