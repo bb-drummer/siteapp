@@ -4,45 +4,26 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-//import Siteapp from '../../dist/js/siteapp.min.js';
-/*
-if (!window) {
-	var window = {};
-}
-/*
-*/
 var TestApp = function (_Siteapp) {
-	_inherits(TestApp, _Siteapp);
+  _inherits(TestApp, _Siteapp);
 
-	function TestApp() {
-		_classCallCheck(this, TestApp);
+  function TestApp() {
+    _classCallCheck(this, TestApp);
 
-		return _possibleConstructorReturn(this, (TestApp.__proto__ || Object.getPrototypeOf(TestApp)).apply(this, arguments));
-	}
+    return _possibleConstructorReturn(this, (TestApp.__proto__ || Object.getPrototypeOf(TestApp)).apply(this, arguments));
+  }
 
-	return TestApp;
+  return TestApp;
 }(Siteapp);
 
 ;
 
 var testApp = new TestApp();
-
-//window.Siteapp = Siteapp;
-//window.MyApp   = MyApp;
-
-testApp.addToGlobal(window);
-testApp.addToJquery($);
-testApp.addPluginShortcut(window);
-
-//window.testApp   = testApp;
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-//var Siteapp = window.Siteapp;
-//var testApp = window.testApp;
 
 var $el = $('<div data-siteapp-myplugin></div>');
 var myObj;
@@ -58,7 +39,7 @@ describe('Siteapp core', function () {
 		$.fn.siteapp.should.be.a('function');
 	});
 
-	it('has a module plugin shortcuts ("$$T", respectively "$$TestApp") ', function () {
+	it('has a module plugin shortcuts (short: "$$T", long: "$$TestApp") ', function () {
 		testApp.addPluginShortcut(window);
 		window['$$T'].should.be.a('function');
 		window['$$TestApp'].should.be.a('function');

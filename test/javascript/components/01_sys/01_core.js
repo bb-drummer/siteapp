@@ -1,6 +1,3 @@
-//var Siteapp = window.Siteapp;
-//var testApp = window.testApp;
-
 var $el = $('<div data-siteapp-myplugin></div>');
 var myObj;
 
@@ -15,7 +12,7 @@ describe('Siteapp core', function() {
 	    ($.fn.siteapp).should.be.a('function');
     });
 
-    it('has a module plugin shortcuts ("$$T", respectively "$$TestApp") ', function() {
+    it('has a module plugin shortcuts (short: "$$T", long: "$$TestApp") ', function() {
 		testApp.addPluginShortcut(window);
 	    (window['$$T']).should.be.a('function');
 	    (window['$$TestApp']).should.be.a('function');
