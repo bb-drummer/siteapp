@@ -1261,7 +1261,7 @@ testApp.addPluginShortcut(window);
       return _classCallCheck(this, TestApp), _possibleConstructorReturn(this, (TestApp.__proto__ || Object.getPrototypeOf(TestApp)).apply(this, arguments));
     }return _inherits(TestApp, e), TestApp;
   }(i["default"]),
-      r = new a();r.addToGlobal(window), r.addToJquery($), r.addPluginShortcut(window), window.Siteapp = i["default"], window.testApp = r;
+      r = new a();window.Siteapp = i["default"], window.testApp = r;
 },,,,, function (e, t, n) {
   e.exports = n(24);
 }]);
@@ -1271,8 +1271,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Siteapp = window.Siteapp;
-var testApp = window.testApp;
+//var Siteapp = window.Siteapp;
+//var testApp = window.testApp;
 
 var $el = $('<div data-siteapp-myplugin></div>');
 var myObj;
@@ -1288,14 +1288,10 @@ describe('Siteapp core', function () {
 		$.fn.siteapp.should.be.a('function');
 	});
 
-	it('has a module plugin shortcut ("$$x", respectively "$$xyz") ', function () {
+	it('has a module plugin shortcuts ("$$T", respectively "$$TestApp") ', function () {
 		testApp.addPluginShortcut(window);
 		window['$$T'].should.be.a('function');
 		window['$$TestApp'].should.be.a('function');
-	});
-
-	it('has a module plugin shortcut (long name "$$xyz") ', function () {
-		testApp.addPluginShortcut(window);
 	});
 
 	describe('[BC] Foundation compatiblity tests', function () {

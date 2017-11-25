@@ -21,7 +21,7 @@ const uglifyConfig= {
   	  compress: {
 		    booleans         : true,
 		    cascade          : true,
-		    collapse_vars    : true,
+		    collapse_vars    : !true,
 		    comparisons      : true,
 		    conditionals     : true,
 		    dead_code        : true,
