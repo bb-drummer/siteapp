@@ -37,13 +37,13 @@ describe ('EventManager module', function () {
 
     	}
 
-    	myApp.Modules.register(MyEvents, 'MyEvents');
+    	testApp.Modules.register(MyEvents, 'MyEvents');
 
-        (myApp.Modules.MyEvents).should.be.a('function');
+        (testApp.Modules.MyEvents).should.be.a('function');
         
         var $el = $('<div data-siteapp-my-events></div>');
         $('body').append($el);
-    	myApp.run();
+    	testApp.run();
     	
     	var plgin = $('[data-siteapp-my-events]').data('siteappPlugin');
     	

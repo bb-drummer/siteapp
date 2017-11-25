@@ -3,93 +3,93 @@ var myObj;
 
 describe('Siteapp core', function() {
     it('exists on the window', function() {
-	    myApp.addToGlobal(window, false);
-        (window.myApp).should.be.an('object');
+	    testApp.addToGlobal(window, false);
+        (window.testApp).should.be.an('object');
     });
 
     it('is a jQuery prototype function', function() {
-		myApp.addToJquery($);
+		testApp.addToJquery($);
 	    ($.fn.siteapp).should.be.a('function');
     });
 
     it('has a module plugin shortcut ("$$x", respectively "$$xyz") ', function() {
-		myApp.addPluginShortcut(window);
-	    (window['$$M']).should.be.a('function');
-	    (window['$$MyApp']).should.be.a('function');
+		testApp.addPluginShortcut(window);
+	    (window['$$T']).should.be.a('function');
+	    (window['$$TestApp']).should.be.a('function');
     });
 
     it('has a module plugin shortcut (long name "$$xyz") ', function() {
-		myApp.addPluginShortcut(window);
+		testApp.addPluginShortcut(window);
     });
 
   
     describe('[BC] Foundation compatiblity tests', function() {
 	    describe ('rtl()', function() {
 		    it ('detects the text direction on the document', function() {
-		        (myApp.rtl()).should.be.false;
+		        (testApp.rtl()).should.be.false;
 		        $('html').attr('dir', 'rtl');
 		
-		        (myApp.rtl()).should.be.true;
+		        (testApp.rtl()).should.be.true;
 		        $('html').attr('dir', 'ltr');
 		    });
 	    });
 	
 	    describe ('plugin()', function() {
 		    afterEach(function() {
-		        delete myApp._plugins['siteapp-plugin'];
-		        delete myApp.Plugin;
+		        delete testApp._plugins['siteapp-plugin'];
+		        delete testApp.Plugin;
 		    });
 		
 		    it ('adds Siteapp modules', function() {
-		        class Plugin extends myApp.Module {};
-		        myApp.plugin(Plugin, 'Plugin');
+		        class Plugin extends testApp.Module {};
+		        testApp.plugin(Plugin, 'Plugin');
 		
-		        (myApp.Modules._modules['siteapp-plugin']).should.be.a('function');
-		        (myApp.plugin).should.be.a('function');
+		        (testApp.Modules._modules['siteapp-plugin']).should.be.a('function');
+		        (testApp.plugin).should.be.a('function');
 		    });
 		
 		    it ('uses the name of the module class/function if one is not provided', function() {
-		        class Plugin extends myApp.Module {};
-		        myApp.plugin(Plugin);
+		        class Plugin extends testApp.Module {};
+		        testApp.plugin(Plugin);
 		
-		        (myApp.Modules._modules['siteapp-plugin']).should.be.a('function');
-		        (myApp.plugin).should.be.a('function');
+		        (testApp.Modules._modules['siteapp-plugin']).should.be.a('function');
+		        (testApp.plugin).should.be.a('function');
 		    });
 	    });
 	  
 	    describe ('registerPlugin()', function() {
 		    it ('registers a new instance of a plugin', function() {
-			    class MyPlugin extends myApp.Module {};
-			    myApp.plugin(Plugin, 'Myplugin');
+			    class MyPlugin extends testApp.Module {};
+			    testApp.plugin(Plugin, 'Myplugin');
 			    
-			    myObj = new myApp.Module( $el, {} );
-			    $el.data(myApp.appName+'Plugin', myObj );
-			    myApp.registerPlugin(myObj);
+			    myObj = new testApp.Module( $el, {} );
+			    $el.data(testApp.appName+'Plugin', myObj );
+			    testApp.registerPlugin(myObj);
 			    
 			    (myObj).should.be.a('object');
 			    (myObj.uuid).should.be.a('string');
 			    (myObj.uuid).should.not.be.empty;
-			    (myApp.Modules._uuids.indexOf(myObj.uuid)).should.not.equal(-1);
+			    (testApp.Modules._uuids.indexOf(myObj.uuid)).should.not.equal(-1);
 		    });
 	    });
 	
 	    describe ('unregisterPlugin()', function() {
 		    it('un-registers a plugin being destroyed', function() {
-			    myApp.unregisterPlugin(myObj);
-		        (myApp.Modules._uuids.indexOf(myObj.uuid)).should.equal(-1);
+			    testApp.unregisterPlugin(myObj);
+		        (testApp.Modules._uuids.indexOf(myObj.uuid)).should.equal(-1);
 		    });
 	    });
 	
 	    describe('GetYoDigits()', function() {
 		    it ('generates a random ID matching a given length', function() {
-		        var id = myApp.GetYoDigits(6);
+		        var id = testApp.GetYoDigits(6);
 		
 		        id.should.be.a('string');
 		        id.should.have.lengthOf(6);
 		    });
 		
 		    it ('can append a namespace to the number', function() {
-		        var id = myApp.GetYoDigits(6, 'plugin');
+		        var id = testApp.GetYoDigits(6, 'plugin');
 		
 		        id.should.be.a('string');
 		        id.should.have.lengthOf(6 + '-plugin'.length);

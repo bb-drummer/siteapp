@@ -26,7 +26,7 @@ describe('Keyboard event module', function() {
   describe('parseKey()', function() {
     it('returns the character pressed for a normal key', function() {
       let event = createEvent(keyCodes['A']),
-          parsedKey = myApp.Keyboard.parseKey(event);
+          parsedKey = testApp.Keyboard.parseKey(event);
 
       parsedKey.should.be.equal('A');
     });
@@ -34,32 +34,32 @@ describe('Keyboard event module', function() {
       for (let key in keyCodes) {
         let keyCode = keyCodes[key];
         let event = createEvent(keyCode),
-            parsedKey = myApp.Keyboard.parseKey(event);
+            parsedKey = testApp.Keyboard.parseKey(event);
 
         parsedKey.should.be.equal(key);
       }
     });
     it('recognizes if CTRL was pressed', function() {
       let event = createEvent(keyCodes['A'], {ctrl: true}),
-          parsedKey = myApp.Keyboard.parseKey(event);
+          parsedKey = testApp.Keyboard.parseKey(event);
 
       parsedKey.should.be.equal('CTRL_A');
     });
     it('recognizes if ALT was pressed', function() {
       let event = createEvent(keyCodes['A'], {alt: true}),
-          parsedKey = myApp.Keyboard.parseKey(event);
+          parsedKey = testApp.Keyboard.parseKey(event);
 
       parsedKey.should.be.equal('ALT_A');
     });
     it('recognizes if SHIFT was pressed', function() {
       let event = createEvent(keyCodes['A'], {shift: true}),
-          parsedKey = myApp.Keyboard.parseKey(event);
+          parsedKey = testApp.Keyboard.parseKey(event);
 
       parsedKey.should.be.equal('SHIFT_A');
     });
     it('recognizes if multiple modifiers were pressed', function() {
       let event = createEvent(keyCodes['A'], {shift: true, alt: true, ctrl: true}),
-          parsedKey = myApp.Keyboard.parseKey(event);
+          parsedKey = testApp.Keyboard.parseKey(event);
 
       parsedKey.should.be.equal('ALT_CTRL_SHIFT_A');
     });
@@ -69,13 +69,13 @@ describe('Keyboard event module', function() {
       let spy = sinon.spy();
 
       // Register component
-      myApp.Keyboard.register('MyComponent', {
+      testApp.Keyboard.register('MyComponent', {
         'ESCAPE': 'close'
       });
 
       let event = createEvent(keyCodes['ESCAPE']);
 
-      myApp.Keyboard.handleKey(event, 'MyComponent', {
+      testApp.Keyboard.handleKey(event, 'MyComponent', {
         close: () => {
           spy();
         }
@@ -87,13 +87,13 @@ describe('Keyboard event module', function() {
       let spy = sinon.spy();
 
       // Register component
-      myApp.Keyboard.register('MyComponent', {
+      testApp.Keyboard.register('MyComponent', {
         'ESCAPE': 'close'
       });
 
       let event = createEvent(keyCodes['ESCAPE']);
 
-      myApp.Keyboard.handleKey(event, 'MyComponent', {
+      testApp.Keyboard.handleKey(event, 'MyComponent', {
         close: () => {
           // stuff
         },
@@ -108,12 +108,12 @@ describe('Keyboard event module', function() {
       let spy = sinon.spy();
 
       // Register component
-      myApp.Keyboard.register('MyComponent', {
+      testApp.Keyboard.register('MyComponent', {
       });
 
       let event = createEvent(keyCodes['ESCAPE']);
 
-      myApp.Keyboard.handleKey(event, 'MyComponent', {
+      testApp.Keyboard.handleKey(event, 'MyComponent', {
         unhandled: () => {
           spy();
         }
@@ -130,7 +130,7 @@ describe('Keyboard event module', function() {
             <button>Button</button>
           </div>`).appendTo('body');
 
-      let $focusable = myApp.Keyboard.findFocusable($html);
+      let $focusable = testApp.Keyboard.findFocusable($html);
 
       $focusable.length.should.be.equal(2);
 
@@ -143,7 +143,7 @@ describe('Keyboard event module', function() {
             <button style="display: none;">Button</button>
           </div>`).appendTo('body');
 
-      let $focusable = myApp.Keyboard.findFocusable($html);
+      let $focusable = testApp.Keyboard.findFocusable($html);
 
       $focusable.length.should.be.equal(0);
 
@@ -155,7 +155,7 @@ describe('Keyboard event module', function() {
             <button disabled>Button</button>
           </div>`).appendTo('body');
 
-      let $focusable = myApp.Keyboard.findFocusable($html);
+      let $focusable = testApp.Keyboard.findFocusable($html);
 
       $focusable.length.should.be.equal(0);
 
@@ -167,7 +167,7 @@ describe('Keyboard event module', function() {
             <button tabindex="-1">Button</button>
           </div>`).appendTo('body');
 
-      let $focusable = myApp.Keyboard.findFocusable($html);
+      let $focusable = testApp.Keyboard.findFocusable($html);
 
       $focusable.length.should.be.equal(0);
 
@@ -183,7 +183,7 @@ describe('Keyboard event module', function() {
             <a href="#">Link3</a>
           </div>`).appendTo('body');
 
-      myApp.Keyboard.trapFocus($html);
+      testApp.Keyboard.trapFocus($html);
       $html.find('a').last().focus();
 
       let event = createEvent(keyCodes['TAB']);
@@ -201,7 +201,7 @@ describe('Keyboard event module', function() {
             <a href="#">Link3</a>
           </div>`).appendTo('body');
 
-      myApp.Keyboard.trapFocus($html);
+      testApp.Keyboard.trapFocus($html);
       $html.find('a').first().focus();
 
       let event = createEvent(keyCodes['TAB'], {shift: true});
@@ -221,10 +221,10 @@ describe('Keyboard event module', function() {
             <a href="#">Link3</a>
           </div>`).appendTo('body');
 
-      myApp.Keyboard.trapFocus($html);
+      testApp.Keyboard.trapFocus($html);
       $html.find('a').last().focus();
 
-      myApp.Keyboard.releaseFocus($html);
+      testApp.Keyboard.releaseFocus($html);
 
       let event = createEvent(keyCodes['TAB']);
       $(document.activeElement).trigger(event);
@@ -241,10 +241,10 @@ describe('Keyboard event module', function() {
             <a href="#">Link3</a>
           </div>`).appendTo('body');
 
-      myApp.Keyboard.trapFocus($html);
+      testApp.Keyboard.trapFocus($html);
       $html.find('a').first().focus();
 
-      myApp.Keyboard.releaseFocus($html);
+      testApp.Keyboard.releaseFocus($html);
 
 
       let event = createEvent(createEvent(keyCodes['TAB'], {shift: true}));

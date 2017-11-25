@@ -4,81 +4,50 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-//import Siteapp from '../../dist/js/siteapp.min.js';
-
-var MyApp = function (_Siteapp) {
-  _inherits(MyApp, _Siteapp);
-
-  function MyApp() {
-    _classCallCheck(this, MyApp);
-
-    return _possibleConstructorReturn(this, (MyApp.__proto__ || Object.getPrototypeOf(MyApp)).apply(this, arguments));
-  }
-
-  return MyApp;
-}(Siteapp);
-
-;
-
-var myApp = new MyApp();
-
-//window.Siteapp = Siteapp;
-//window.MyApp   = MyApp;
-
-myApp.addToGlobal(window);
-myApp.addToGlobal($);
-
-//window.myApp   = myApp;
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 var $el = $('<div data-siteapp-myplugin></div>');
 var myObj;
 
 describe('Siteapp core', function () {
 	it('exists on the window', function () {
-		myApp.addToGlobal(window, false);
-		window.myApp.should.be.an('object');
+		testApp.addToGlobal(window, false);
+		window.testApp.should.be.an('object');
 	});
 
 	it('is a jQuery prototype function', function () {
-		myApp.addToJquery($);
+		testApp.addToJquery($);
 		$.fn.siteapp.should.be.a('function');
 	});
 
 	it('has a module plugin shortcut ("$$x", respectively "$$xyz") ', function () {
-		myApp.addPluginShortcut(window);
-		window['$$M'].should.be.a('function');
-		window['$$MyApp'].should.be.a('function');
+		testApp.addPluginShortcut(window);
+		window['$$T'].should.be.a('function');
+		window['$$TestApp'].should.be.a('function');
 	});
 
 	it('has a module plugin shortcut (long name "$$xyz") ', function () {
-		myApp.addPluginShortcut(window);
+		testApp.addPluginShortcut(window);
 	});
 
 	describe('[BC] Foundation compatiblity tests', function () {
 		describe('rtl()', function () {
 			it('detects the text direction on the document', function () {
-				myApp.rtl().should.be.false;
+				testApp.rtl().should.be.false;
 				$('html').attr('dir', 'rtl');
 
-				myApp.rtl().should.be.true;
+				testApp.rtl().should.be.true;
 				$('html').attr('dir', 'ltr');
 			});
 		});
 
 		describe('plugin()', function () {
 			afterEach(function () {
-				delete myApp._plugins['siteapp-plugin'];
-				delete myApp.Plugin;
+				delete testApp._plugins['siteapp-plugin'];
+				delete testApp.Plugin;
 			});
 
 			it('adds Siteapp modules', function () {
-				var Plugin = function (_myApp$Module) {
-					_inherits(Plugin, _myApp$Module);
+				var Plugin = function (_testApp$Module) {
+					_inherits(Plugin, _testApp$Module);
 
 					function Plugin() {
 						_classCallCheck(this, Plugin);
@@ -87,18 +56,18 @@ describe('Siteapp core', function () {
 					}
 
 					return Plugin;
-				}(myApp.Module);
+				}(testApp.Module);
 
 				;
-				myApp.plugin(Plugin, 'Plugin');
+				testApp.plugin(Plugin, 'Plugin');
 
-				myApp.Modules._modules['siteapp-plugin'].should.be.a('function');
-				myApp.plugin.should.be.a('function');
+				testApp.Modules._modules['siteapp-plugin'].should.be.a('function');
+				testApp.plugin.should.be.a('function');
 			});
 
 			it('uses the name of the module class/function if one is not provided', function () {
-				var Plugin = function (_myApp$Module2) {
-					_inherits(Plugin, _myApp$Module2);
+				var Plugin = function (_testApp$Module2) {
+					_inherits(Plugin, _testApp$Module2);
 
 					function Plugin() {
 						_classCallCheck(this, Plugin);
@@ -107,20 +76,20 @@ describe('Siteapp core', function () {
 					}
 
 					return Plugin;
-				}(myApp.Module);
+				}(testApp.Module);
 
 				;
-				myApp.plugin(Plugin);
+				testApp.plugin(Plugin);
 
-				myApp.Modules._modules['siteapp-plugin'].should.be.a('function');
-				myApp.plugin.should.be.a('function');
+				testApp.Modules._modules['siteapp-plugin'].should.be.a('function');
+				testApp.plugin.should.be.a('function');
 			});
 		});
 
 		describe('registerPlugin()', function () {
 			it('registers a new instance of a plugin', function () {
-				var MyPlugin = function (_myApp$Module3) {
-					_inherits(MyPlugin, _myApp$Module3);
+				var MyPlugin = function (_testApp$Module3) {
+					_inherits(MyPlugin, _testApp$Module3);
 
 					function MyPlugin() {
 						_classCallCheck(this, MyPlugin);
@@ -129,39 +98,39 @@ describe('Siteapp core', function () {
 					}
 
 					return MyPlugin;
-				}(myApp.Module);
+				}(testApp.Module);
 
 				;
-				myApp.plugin(Plugin, 'Myplugin');
+				testApp.plugin(Plugin, 'Myplugin');
 
-				myObj = new myApp.Module($el, {});
-				$el.data(myApp.appName + 'Plugin', myObj);
-				myApp.registerPlugin(myObj);
+				myObj = new testApp.Module($el, {});
+				$el.data(testApp.appName + 'Plugin', myObj);
+				testApp.registerPlugin(myObj);
 
 				myObj.should.be.a('object');
 				myObj.uuid.should.be.a('string');
 				myObj.uuid.should.not.be.empty;
-				myApp.Modules._uuids.indexOf(myObj.uuid).should.not.equal(-1);
+				testApp.Modules._uuids.indexOf(myObj.uuid).should.not.equal(-1);
 			});
 		});
 
 		describe('unregisterPlugin()', function () {
 			it('un-registers a plugin being destroyed', function () {
-				myApp.unregisterPlugin(myObj);
-				myApp.Modules._uuids.indexOf(myObj.uuid).should.equal(-1);
+				testApp.unregisterPlugin(myObj);
+				testApp.Modules._uuids.indexOf(myObj.uuid).should.equal(-1);
 			});
 		});
 
 		describe('GetYoDigits()', function () {
 			it('generates a random ID matching a given length', function () {
-				var id = myApp.GetYoDigits(6);
+				var id = testApp.GetYoDigits(6);
 
 				id.should.be.a('string');
 				id.should.have.lengthOf(6);
 			});
 
 			it('can append a namespace to the number', function () {
-				var id = myApp.GetYoDigits(6, 'plugin');
+				var id = testApp.GetYoDigits(6, 'plugin');
 
 				id.should.be.a('string');
 				id.should.have.lengthOf(6 + '-plugin'.length);
@@ -210,7 +179,7 @@ describe('Keyboard event module', function () {
   describe('parseKey()', function () {
     it('returns the character pressed for a normal key', function () {
       var event = createEvent(keyCodes['A']),
-          parsedKey = myApp.Keyboard.parseKey(event);
+          parsedKey = testApp.Keyboard.parseKey(event);
 
       parsedKey.should.be.equal('A');
     });
@@ -218,32 +187,32 @@ describe('Keyboard event module', function () {
       for (var key in keyCodes) {
         var keyCode = keyCodes[key];
         var event = createEvent(keyCode),
-            parsedKey = myApp.Keyboard.parseKey(event);
+            parsedKey = testApp.Keyboard.parseKey(event);
 
         parsedKey.should.be.equal(key);
       }
     });
     it('recognizes if CTRL was pressed', function () {
       var event = createEvent(keyCodes['A'], { ctrl: true }),
-          parsedKey = myApp.Keyboard.parseKey(event);
+          parsedKey = testApp.Keyboard.parseKey(event);
 
       parsedKey.should.be.equal('CTRL_A');
     });
     it('recognizes if ALT was pressed', function () {
       var event = createEvent(keyCodes['A'], { alt: true }),
-          parsedKey = myApp.Keyboard.parseKey(event);
+          parsedKey = testApp.Keyboard.parseKey(event);
 
       parsedKey.should.be.equal('ALT_A');
     });
     it('recognizes if SHIFT was pressed', function () {
       var event = createEvent(keyCodes['A'], { shift: true }),
-          parsedKey = myApp.Keyboard.parseKey(event);
+          parsedKey = testApp.Keyboard.parseKey(event);
 
       parsedKey.should.be.equal('SHIFT_A');
     });
     it('recognizes if multiple modifiers were pressed', function () {
       var event = createEvent(keyCodes['A'], { shift: true, alt: true, ctrl: true }),
-          parsedKey = myApp.Keyboard.parseKey(event);
+          parsedKey = testApp.Keyboard.parseKey(event);
 
       parsedKey.should.be.equal('ALT_CTRL_SHIFT_A');
     });
@@ -253,13 +222,13 @@ describe('Keyboard event module', function () {
       var spy = sinon.spy();
 
       // Register component
-      myApp.Keyboard.register('MyComponent', {
+      testApp.Keyboard.register('MyComponent', {
         'ESCAPE': 'close'
       });
 
       var event = createEvent(keyCodes['ESCAPE']);
 
-      myApp.Keyboard.handleKey(event, 'MyComponent', {
+      testApp.Keyboard.handleKey(event, 'MyComponent', {
         close: function () {
           spy();
         }
@@ -271,13 +240,13 @@ describe('Keyboard event module', function () {
       var spy = sinon.spy();
 
       // Register component
-      myApp.Keyboard.register('MyComponent', {
+      testApp.Keyboard.register('MyComponent', {
         'ESCAPE': 'close'
       });
 
       var event = createEvent(keyCodes['ESCAPE']);
 
-      myApp.Keyboard.handleKey(event, 'MyComponent', {
+      testApp.Keyboard.handleKey(event, 'MyComponent', {
         close: function () {
           // stuff
         },
@@ -292,11 +261,11 @@ describe('Keyboard event module', function () {
       var spy = sinon.spy();
 
       // Register component
-      myApp.Keyboard.register('MyComponent', {});
+      testApp.Keyboard.register('MyComponent', {});
 
       var event = createEvent(keyCodes['ESCAPE']);
 
-      myApp.Keyboard.handleKey(event, 'MyComponent', {
+      testApp.Keyboard.handleKey(event, 'MyComponent', {
         unhandled: function () {
           spy();
         }
@@ -310,7 +279,7 @@ describe('Keyboard event module', function () {
     it('finds focusable elements inside a container', function () {
       var $html = $('<div>\n            <a href="#">Link</a>\n            <button>Button</button>\n          </div>').appendTo('body');
 
-      var $focusable = myApp.Keyboard.findFocusable($html);
+      var $focusable = testApp.Keyboard.findFocusable($html);
 
       $focusable.length.should.be.equal(2);
 
@@ -320,7 +289,7 @@ describe('Keyboard event module', function () {
     it('does not find hidden focusable elements', function () {
       var $html = $('<div>\n            <a style="display: none;" href="#">Link</a>\n            <button style="display: none;">Button</button>\n          </div>').appendTo('body');
 
-      var $focusable = myApp.Keyboard.findFocusable($html);
+      var $focusable = testApp.Keyboard.findFocusable($html);
 
       $focusable.length.should.be.equal(0);
 
@@ -330,7 +299,7 @@ describe('Keyboard event module', function () {
     it('does not find disabled focusable elements', function () {
       var $html = $('<div>\n            <button disabled>Button</button>\n          </div>').appendTo('body');
 
-      var $focusable = myApp.Keyboard.findFocusable($html);
+      var $focusable = testApp.Keyboard.findFocusable($html);
 
       $focusable.length.should.be.equal(0);
 
@@ -340,7 +309,7 @@ describe('Keyboard event module', function () {
     it('does not find focusable elements with negative tabindex', function () {
       var $html = $('<div>\n            <button tabindex="-1">Button</button>\n          </div>').appendTo('body');
 
-      var $focusable = myApp.Keyboard.findFocusable($html);
+      var $focusable = testApp.Keyboard.findFocusable($html);
 
       $focusable.length.should.be.equal(0);
 
@@ -352,7 +321,7 @@ describe('Keyboard event module', function () {
     it('moves the focus to the first focusable element', function () {
       var $html = $('<div>\n            <a href="#">Link1</a>\n            <a href="#">Link2</a>\n            <a href="#">Link3</a>\n          </div>').appendTo('body');
 
-      myApp.Keyboard.trapFocus($html);
+      testApp.Keyboard.trapFocus($html);
       $html.find('a').last().focus();
 
       var event = createEvent(keyCodes['TAB']);
@@ -366,7 +335,7 @@ describe('Keyboard event module', function () {
     it('moves the focus to the last focusable element', function () {
       var $html = $('<div>\n            <a href="#">Link1</a>\n            <a href="#">Link2</a>\n            <a href="#">Link3</a>\n          </div>').appendTo('body');
 
-      myApp.Keyboard.trapFocus($html);
+      testApp.Keyboard.trapFocus($html);
       $html.find('a').first().focus();
 
       var event = createEvent(keyCodes['TAB'], { shift: true });
@@ -382,10 +351,10 @@ describe('Keyboard event module', function () {
     it('stops trapping the focus at the end', function () {
       var $html = $('<div>\n            <a href="#">Link1</a>\n            <a href="#">Link2</a>\n            <a href="#">Link3</a>\n          </div>').appendTo('body');
 
-      myApp.Keyboard.trapFocus($html);
+      testApp.Keyboard.trapFocus($html);
       $html.find('a').last().focus();
 
-      myApp.Keyboard.releaseFocus($html);
+      testApp.Keyboard.releaseFocus($html);
 
       var event = createEvent(keyCodes['TAB']);
       $(document.activeElement).trigger(event);
@@ -398,10 +367,10 @@ describe('Keyboard event module', function () {
     it('stops trapping the focus at the top', function () {
       var $html = $('<div>\n            <a href="#">Link1</a>\n            <a href="#">Link2</a>\n            <a href="#">Link3</a>\n          </div>').appendTo('body');
 
-      myApp.Keyboard.trapFocus($html);
+      testApp.Keyboard.trapFocus($html);
       $html.find('a').first().focus();
 
-      myApp.Keyboard.releaseFocus($html);
+      testApp.Keyboard.releaseFocus($html);
 
       var event = createEvent(createEvent(keyCodes['TAB'], { shift: true }));
       $(document.activeElement).trigger(event);
@@ -417,36 +386,36 @@ describe('Log module', function () {
 
     it('Logger object is present within application namespace/class/object', function () {
 
-        myApp.Log.should.be.an('object');
+        testApp.Log.should.be.an('object');
     });
 
     it('Shortcut returns Logger object', function () {
 
-        myApp.L.should.be.an('object');
+        testApp.L.should.be.an('object');
     });
 
     it('clear() empties the list of entries', function () {
 
-        myApp.L.clear();
+        testApp.L.clear();
 
-        myApp.L.logentries.should.be.empty;
+        testApp.L.logentries.should.be.empty;
     });
 
     it('log() adds a new one to the list of entries', function () {
 
-        myApp.L.log('some log-entry...', 'some type', 'some context');
+        testApp.L.log('some log-entry...', 'some type', 'some context');
 
-        myApp.L.logentries.should.not.be.empty;
+        testApp.L.logentries.should.not.be.empty;
     });
 
     it('get() retrieves the (complete) list of log-entries', function () {
 
-        myApp.L.get().should.not.be.empty;
+        testApp.L.get().should.not.be.empty;
     });
 
     it('get(n) retrieves the n-th (zero-indexed) entry from the list of log-entries', function () {
-        var lastentry = myApp.L.logentries.length - 1;
-        myApp.L.get(lastentry).should.not.be.undefined;
+        var lastentry = testApp.L.logentries.length - 1;
+        testApp.L.get(lastentry).should.not.be.undefined;
     });
 });
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -494,13 +463,13 @@ describe('EventManager module', function () {
             return MyEvents;
         }(Siteapp.Module);
 
-        myApp.Modules.register(MyEvents, 'MyEvents');
+        testApp.Modules.register(MyEvents, 'MyEvents');
 
-        myApp.Modules.MyEvents.should.be.a('function');
+        testApp.Modules.MyEvents.should.be.a('function');
 
         var $el = $('<div data-siteapp-my-events></div>');
         $('body').append($el);
-        myApp.run();
+        testApp.run();
 
         var plgin = $('[data-siteapp-my-events]').data('siteappPlugin');
 
