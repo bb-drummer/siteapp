@@ -2,9 +2,6 @@
 if (!window) {
 	var window = {};
 }
-//var Siteapp = window.Siteapp;
-//var testApp = window.testApp;
-
 /*
 
 class TestApp extends Siteapp {};
