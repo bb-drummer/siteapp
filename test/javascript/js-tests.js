@@ -1241,7 +1241,7 @@
       return _classCallCheck(this, TestApp), _possibleConstructorReturn(this, (TestApp.__proto__ || Object.getPrototypeOf(TestApp)).apply(this, arguments));
     }return _inherits(TestApp, e), TestApp;
   }(i["default"]),
-      r = new a();r.addToGlobal(window), r.addToJquery($), r.addPluginShortcut(window);
+      r = new a();r.addToGlobal(window), r.addToJquery($), r.addPluginShortcut(window), window.testApp = r;
 },,,,, function (e, t, n) {
   e.exports = n(24);
 }]);

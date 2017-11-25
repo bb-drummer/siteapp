@@ -18,5 +18,5 @@ testApp.addPluginShortcut(window);
 
 
 //window.Siteapp = Siteapp;
-//window.testApp = testApp;
+window.testApp = testApp;
 
