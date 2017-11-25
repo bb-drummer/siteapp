@@ -49,7 +49,7 @@
     "test:javascript:transpile": "gulp sass:siteapp && gulp test:transpile-js",
     "test:javascript:phantomjs": "npm run test:javascript:transpile && mocha-phantomjs --ignore-resource-errors test/javascript/index.html",
     "test:javascript:browserstack": "npm run test:javascript:transpile && browserstack-runner",
-    "test:javascript:ci": "npm run test:javascript:transpile && mocha-phantomjs --compilers js:babel-register --ignore-resource-errors test/javascript/index.html",
+    "test:javascript:ci": "npm run test:javascript:transpile && mocha-phantomjs --ignore-resource-errors test/javascript/index.html",
     "test:visual": "gulp test",
     "deploy": "gulp deploy",
     "deploy:prep": "gulp deploy:prep",
