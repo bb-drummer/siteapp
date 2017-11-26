@@ -10,10 +10,8 @@ _build
 dist
 
 # some docs
-LICENSE
 CONTRIBUTING.md
 code-of-conduct.md
-README.md
 
 .DS_Store
 node_modules
