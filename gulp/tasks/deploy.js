@@ -17,6 +17,54 @@ var CONFIG = require('../config.js');
 var CURRENT_VERSION = require('../../package.json').version;
 var NEXT_VERSION;
 
+/**
+ * uglify stats (src -> min):
+ * 
+
+succeeding tests:
+
+compress: true, mangle: true, tests: ok
+
+-rw-r--r--   1 bba  staff  130397 25 Nov 13:38 siteapp-foundation.js
+-rw-r--r--   1 bba  staff   36928 25 Nov 13:38 siteapp-foundation.min.js
+-rw-r--r--   1 bba  staff  198189 25 Nov 13:38 siteapp.js
+-rw-r--r--   1 bba  staff   61770 25 Nov 13:38 siteapp.min.js
+
+
+compress: true, mangle: false, tests: ok
+
+-rw-r--r--   1 bba  staff  130397 26 Nov 12:40 siteapp-foundation.js
+-rw-r--r--   1 bba  staff   53643 26 Nov 12:40 siteapp-foundation.min.js
+-rw-r--r--   1 bba  staff  198189 26 Nov 12:40 siteapp.js
+-rw-r--r--   1 bba  staff   91178 26 Nov 12:40 siteapp.min.js
+
+
+failing tests:
+
+compress: false, mangle: true, tests: parse error
+
+-rw-r--r--   1 bba  staff  130397 26 Nov 12:39 siteapp-foundation.js
+-rw-r--r--   1 bba  staff   39555 26 Nov 12:39 siteapp-foundation.min.js
+-rw-r--r--   1 bba  staff  198189 26 Nov 12:39 siteapp.js
+-rw-r--r--   1 bba  staff   65886 26 Nov 12:39 siteapp.min.js
+
+
+compress: false, mangle: false, tests: parse error
+
+-rw-r--r--   1 bba  staff  130397 26 Nov 12:41 siteapp-foundation.js
+-rw-r--r--   1 bba  staff   57188 26 Nov 12:41 siteapp-foundation.min.js
+-rw-r--r--   1 bba  staff  198189 26 Nov 12:41 siteapp.js
+-rw-r--r--   1 bba  staff   97081 26 Nov 12:41 siteapp.min.js
+
+
+compress: custom, mangle: true, tests: parse error
+
+-rw-r--r--   1 bba  staff  130397 26 Nov 12:59 siteapp-foundation.js
+-rw-r--r--   1 bba  staff   37770 26 Nov 12:59 siteapp-foundation.min.js
+-rw-r--r--   1 bba  staff  198189 26 Nov 12:59 siteapp.js
+-rw-r--r--   1 bba  staff   63163 26 Nov 12:59 siteapp.min.js
+
+ */
 const uglifyConfig= {
   	  compress: true /* {
 		    booleans         : true,
@@ -31,7 +79,7 @@ const uglifyConfig= {
 		    expression       : false,
 		    global_defs      : {},
 		    hoist_funs       : true,
-		    hoist_vars       : false,
+		    hoist_vars       : !false,
 		    //ie8              : false,
 		    if_return        : true,
 		    //inline           : true,
@@ -49,7 +97,7 @@ const uglifyConfig= {
 		    sequences        : true,
 		    side_effects     : true,
 		    switches         : true,
-		    top_retain       : ['Siteapp'],
+		    top_retain       : null, //['Siteapp'],
 		    //typeofs          : true,
 		    unsafe           : false,
 		    unsafe_comps     : false,
