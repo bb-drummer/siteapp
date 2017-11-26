@@ -19,11 +19,10 @@ So, **" Why, the heck, another framework ?! "** ... or ... **where this started 
 While fooling around with _Foundation_ for some time I stumbled across a comment inside its core code:
 
 > // TODO: consider not making this a jQuery function
-> // TODO: need way to reflow vs. re-initialize
 
 so, I gave it a thought
 
-> " yeah, why not? let's go for it... ^^ "
+> " yeah ok, why not... let's go for it ^^ "
 
 coded here and there, tried this, tried that, played around some more, tried something other...
 And then eventually, when 'I stepped back and took a look from above', I noticed

@@ -50,18 +50,38 @@ retrieves instantiated application core object
 
 - instance name inital, ex: `$M` 
 
+comes in handy with long instance names, for example
+```
+class AcmeIncFrontendApplication extends Siteapp {
+     /* ... */
+};
+
+const AcmeIncFrontendApp = new AcmeIncFrontendApplication();
+```
+instead of 
+```
+var attr = AcmeIncFrontendApp.sys.hyphenate(someCamelCasedString);
+```
+in this case, just call
+```
+$A.sys.hyphenate(someCamelCasedString);
+```
+
 ...
 
 
 ### `$${Xxy}` and `$${X}` element plugin shortcut
 
-retrieves instantiated module attached to a DOM element
-...
+retrieves an instantiated module attached to a DOM element instead of calling 
+```
+var plgins = $('[data-siteapp-my-module]').data('siteappPlugin');
+```
 
 - long: full instance name, ex: `$$MyApp`
 - short: instance name inital, ex: `$$M` 
 
 ...
+
 
 list/array of instances
 ```
@@ -150,7 +170,7 @@ then, somewhere else, for example, inside another module
 ```
 // ... somewhere else...
 
-var plgin = $('[data-siteapp-my-events]').data('siteappPlugin');
+var plgin = $('[data-siteapp-my-module]').data('siteappPlugin');
     	
 plgin.trigger('my-trigger');
 
