@@ -25,6 +25,8 @@ npm-debug.log
 .buildpath
 .project
 .settings
+.scanner*
+*sonar*
 
 # (local) backups
 *_save*

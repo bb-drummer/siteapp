@@ -1,8 +1,8 @@
 {
   "name": "siteapp",
-  "version": "0.0.1-alpha.0",
-  "description": "mini application framework and modulemanager",
-  "main": "dist/js/npm.js",
+  "version": "0.0.1",
+  "description": "just another application framework",
+  "main": "dist/js/siteapp.js",
   "author": "Björn Bartels <coding@bjoernbartels.earth>",
   "homepage": "https://bjoernbartels.earth",
   "license": "Apache-2.0",
@@ -15,14 +15,14 @@
     "email": "coding@bjoernbartels.earth"
   },
   "engines": {
-    "node": ">=4.0",
-    "npm": ">=2.14.2"
+    "node": ">=6.0",
+    "npm": ">=3.0"
   },
   "jspm": {
     "main": "dist/js/siteapp.js",
     "format": "global",
     "shim": {
-      "dist/js/foundation": {
+      "dist/js/siteapp": {
         "deps": [
           "jquery"
         ]
@@ -63,6 +63,7 @@
     "process-nextick-args": "^1.0.7",
     "require": "^2.4.20",
     "requirejs": "^2.3.5",
+    "uglify-js": "^3.2.0",
     "util-deprecate": "^1.0.2",
     "what-input": "^4.1.3"
   },

@@ -199,7 +199,7 @@ _Note_: due to the abstraction and its extended features the shimmed port is tal
 | [CI (Travis-CI)](https://travis-ci.org/bb-drummer/siteapp) | [![Build Status](https://travis-ci.org/bb-drummer/siteapp.svg?branch=master)](https://travis-ci.org/bb-drummer/siteapp) |
 | [QA (Scrutinizer-CI)](https://scrutinizer-ci.com/g/bb-drummer/siteapp/) | [![Build Status](https://scrutinizer-ci.com/g/bb-drummer/siteapp/badges/build.png?b=master)](https://scrutinizer-ci.com/g/bb-drummer/siteapp/build-status/master) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/bb-drummer/siteapp/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/bb-drummer/siteapp/?branch=master) |
 | [GitLab](https://gitlab.bjoernbartels.earth/js/siteapp/) | [![pipeline status](https://gitlab.bjoernbartels.earth/js/siteapp/badges/master/pipeline.svg)](https://gitlab.bjoernbartels.earth/js/siteapp/commits/master) |
-
+| [dependencies](https://david-dm.org/bb-drummer/siteapp) | [![dependencies status](https://david-dm.org/bb-drummer/siteapp.svg)](https://david-dm.org/bb-drummer/siteapp) |
 
 ---
 
