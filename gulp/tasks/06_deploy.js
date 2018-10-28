@@ -108,20 +108,11 @@ const uglifyConfig= {
 		    unused           : !true,
 		    warnings         : false
 	  }*/,
-	  mangle: true /*{
+	  mangle: !true /*{
 		    keep_fnames      : !false,
 		  
 	  }*/
 };
-
-gulp.task('deploy', function(cb) {
-  sequence(/*'deploy:prompt', 'deploy:version',*/ 'deploy:dist', 'deploy:plugins', 'deploy:settings', /*'deploy:commit',*/ 'deploy:templates', cb);
-});
-
-gulp.task('deploy:prep', function(cb) {
-  sequence(/*'deploy:prompt', 'deploy:version',*/ 'deploy:dist', 'deploy:plugins', 'deploy:settings', cb);
-});
-
 
 gulp.task('deploy:prompt', function(cb) {
   inquirer.prompt([{
@@ -143,7 +134,7 @@ gulp.task('deploy:version', function() {
 });
 
 // Generates compiled CSS and JS files and puts them in the dist/ folder
-gulp.task('deploy:dist', ['sass:siteapp', 'javascript:siteapp'], function() {
+gulp.task('deploy:dist', gulp.series(['sass:siteapp', 'javascript:siteapp', function() {
   var cssFilter = filter(['**/*.css'], { restore: true });
   var jsFilter  = filter(['**/*.js'], { restore: true });
 
@@ -163,11 +154,11 @@ gulp.task('deploy:dist', ['sass:siteapp', 'javascript:siteapp'], function() {
       .pipe(uglify(uglifyConfig))
       .pipe(rename({ suffix: '.min' }))
       .pipe(gulp.dest('./dist/js'));
-});
+}]));
 
 // Copies standalone JavaScript plugins to dist/ folder
 gulp.task('deploy:plugins', function() {
-  gulp.src('_build/assets/js/plugins/*.js')
+  return gulp.src('_build/assets/js/plugins/*.js')
     .pipe(stripDebug())
     .pipe(gulp.dest('dist/js/plugins'))
     .pipe(stripDebug())
@@ -207,9 +198,9 @@ gulp.task('deploy:commit', function(cb) {
   exec('git push origin develop --follow-tags');
   cb();
 });
-
+/*
 // Uploads the documentation to the live server
-gulp.task('deploy:docs', ['build'], function() {
+gulp.task('deploy:docs', gulp.series(['build', function() {
   return gulp.src('./_build/**')
     .pipe(confirm('Make sure everything looks right before you deploy.'))
     .pipe(rsync({
@@ -217,10 +208,10 @@ gulp.task('deploy:docs', ['build'], function() {
       hostname: 'deployer@72.32.134.77',
       destination: '/home/deployer/sites/siteapp-sites-6-docs'
     }));
-  });
+}]));
 
 // Uploads the documentation to the live server in beta env
-gulp.task('deploy:beta', ['build'], function() {
+gulp.task('deploy:beta', gulp.series(['build', function() {
   return gulp.src('./_build/**')
     .pipe(confirm('Make sure everything looks right before you deploy.'))
     .pipe(rsync({
@@ -228,9 +219,8 @@ gulp.task('deploy:beta', ['build'], function() {
       hostname: 'deployer@72.32.134.77',
       destination: '/home/deployer/sites/scalingsexiness/siteapp-sites-6-docs'
     }));
-});
-
-
+}]));
+*/
 
 // This part of the deploy process hasn't been tested! It should be done manually for now
 gulp.task('deploy:templates', function(done) {
@@ -253,7 +243,7 @@ gulp.task('deploy:templates', function(done) {
 });
 
 // The Customizer runs this function to generate files it needs
-gulp.task('deploy:custom', ['sass:siteapp', 'javascript:siteapp'], function() {
+gulp.task('deploy:custom', gulp.series(['sass:siteapp', 'javascript:siteapp', function() {
   gulp.src('./_build/assets/css/siteapp.css')
       .pipe(cleancss({ compatibility: 'ie9' }))
       .pipe(rename('siteapp.min.css'))
@@ -263,4 +253,10 @@ gulp.task('deploy:custom', ['sass:siteapp', 'javascript:siteapp'], function() {
       .pipe(uglify())
       .pipe(rename('siteapp.min.js'))
       .pipe(gulp.dest('./_build/assets/js'));
-});
+}]));
+
+gulp.task('deploy', gulp.series([/*'deploy:prompt', 'deploy:version',*/ 'deploy:dist', 'deploy:plugins', 'deploy:settings', /*'deploy:commit',*/ 'deploy:templates']));
+
+gulp.task('deploy:prep', gulp.series([/*'deploy:prompt', 'deploy:version',*/ 'deploy:dist', 'deploy:plugins', 'deploy:settings']));
+
+

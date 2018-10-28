@@ -80,7 +80,7 @@ gulp.task('customizer:prepareSassDeps', function() {
 });
 
 // Creates a Sass file from the module/variable list and creates siteapp.css and siteapp.min.css
-gulp.task('customizer:sass', ['customizer:loadConfig', 'customizer:prepareSassDeps'], function() {
+gulp.task('customizer:sass', gulp.series(['customizer:loadConfig', 'customizer:prepareSassDeps', function() {
   var sassFile = customizer.sass(CUSTOMIZER_CONFIG, MODULE_LIST, VARIABLE_LIST);
 
   var stream = createStream('siteapp.scss', sassFile);
@@ -99,19 +99,19 @@ gulp.task('customizer:sass', ['customizer:loadConfig', 'customizer:prepareSassDe
     .pipe(cleancss({ compatibility: 'ie9' }))
     .pipe(rename('siteapp.min.css'))
     .pipe(gulp.dest(path.join(OUTPUT_DIR, 'css')));
-});
+}]));
 
 // Creates a Siteapp JavaScript file from the module list, and also copies dependencies (jQuery, what-input)
-gulp.task('customizer:javascript-entry', ['customizer:loadConfig'], function() {
+gulp.task('customizer:javascript-entry', gulp.series(['customizer:loadConfig', function() {
   var entryFile = customizer.js(CUSTOMIZER_CONFIG, MODULE_LIST);
   // Create a stream with our entry file
   var stream = createStream('siteapp.js', entryFile);
 
   return stream
     .pipe(gulp.dest(path.join(OUTPUT_DIR, 'js/vendor')));
-});
+}]));
 
-gulp.task('customizer:javascript', ['customizer:javascript-entry'], function() {
+gulp.task('customizer:javascript', gulp.series(['customizer:javascript-entry', function() {
   return gulp.src(path.join(OUTPUT_DIR, 'js/vendor/siteapp.js'))
     .pipe(webpackStream({externals: {jquery: 'jQuery'}, module: WEBPACK_MODULE_CONFIG}, webpack2))
     .pipe(rename('siteapp.js'))
@@ -123,16 +123,16 @@ gulp.task('customizer:javascript', ['customizer:javascript-entry'], function() {
       'node_modules/what-input/dist/what-input.js'
     ]))
     .pipe(gulp.dest(path.join(OUTPUT_DIR, 'js/vendor')));
-});
+}]));
 
 // Copies the boilerplate index.html to the custom download folder
-gulp.task('customizer:html', ['customizer:loadConfig'], function() {
+gulp.task('customizer:html', gulp.series(['customizer:loadConfig', function() {
   var rtlEnabled = VARIABLE_LIST['global-text-direction'] && VARIABLE_LIST['global-text-direction'] === 'rtl';
 
   return gulp.src('customizer/index.html')
     .pipe(If(rtlEnabled, replace('ltr', 'rtl')))
     .pipe(gulp.dest(OUTPUT_DIR));
-});
+}]));
 
 // Creates a custom build by:
 //   - Generating a CSS file
@@ -140,7 +140,7 @@ gulp.task('customizer:html', ['customizer:loadConfig'], function() {
 //   - Copying the index.html file
 //   - Creating a blank app.css file
 //   - Creating an app.js file with Siteapp initialization code
-gulp.task('customizer', ['customizer:sass', 'customizer:javascript', 'customizer:html'], function(done) {
+gulp.task('customizer', gulp.series(['customizer:sass', 'customizer:javascript', 'customizer:html', function(done) {
   var outputFolder = path.dirname(OUTPUT_DIR);
   var outputFileName = path.basename(OUTPUT_DIR);
 
@@ -154,7 +154,7 @@ gulp.task('customizer', ['customizer:sass', 'customizer:javascript', 'customizer
     .on('finish', function() {
       rimraf(OUTPUT_DIR, done);
     });
-  });
+}]));
 
 function createStream(name, content) {
   // Create a stream with our entry file

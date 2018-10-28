@@ -13,9 +13,6 @@ var autoprefixer = require('autoprefixer');
 
 var CONFIG = require('../config.js');
 
-// Compiles Sass files into CSS
-gulp.task('sass', ['sass:siteapp', 'sass:docs']);
-
 // Prepare dependencies
 gulp.task('sass:deps', function() {
   return gulp.src(CONFIG.SASS_DEPS_FILES)
@@ -23,7 +20,7 @@ gulp.task('sass:deps', function() {
 });
 
 // Compiles Siteapp Sass
-gulp.task('sass:siteapp', ['sass:deps'], function() {
+gulp.task('sass:siteapp', gulp.series(['sass:deps', function() {
   return gulp.src(['assets/*'])
     .pipe(sourcemaps.init())
     .pipe(plumber())
@@ -40,10 +37,10 @@ gulp.task('sass:siteapp', ['sass:deps'], function() {
           }))
         .pipe(sassLint.format());
     });
-});
+}]));
 
 // Compiles docs Sass (includes Siteapp code also)
-gulp.task('sass:docs', ['sass:deps'], function() {
+gulp.task('sass:docs', gulp.series(['sass:deps', function() {
   return gulp.src('docs/assets/scss/docs.scss')
     .pipe(sourcemaps.init())
     .pipe(sass({
@@ -54,14 +51,18 @@ gulp.task('sass:docs', ['sass:deps'], function() {
     })]))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('_build/assets/css'));
-});
+}]));
 
 // Audits CSS filesize, selector count, specificity, etc.
-gulp.task('sass:audit', ['sass:siteapp'], function(cb) {
+gulp.task('sass:audit', gulp.series(['sass:siteapp', function(cb) {
   fs.readFile('./_build/assets/css/siteapp.css', function(err, data) {
     var parker = new Parker(require('parker/metrics/All'));
     var results = parker.run(data.toString());
     console.log(prettyJSON.render(results));
     cb();
   });
-});
+}]));
+
+//Compiles Sass files into CSS
+gulp.task('sass', gulp.series(['sass:siteapp', 'sass:docs']));
+
