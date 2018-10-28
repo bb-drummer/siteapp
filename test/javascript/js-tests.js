@@ -1,3 +1,5 @@
+"use strict";
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -19,6 +21,8 @@ var TestApp = function (_Siteapp) {
 ;
 
 var testApp = new TestApp();
+'use strict';
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -168,6 +172,8 @@ describe('Siteapp core', function () {
 		describe('throttle()', function () {});
 	});
 });
+'use strict';
+
 describe('Keyboard event module', function () {
   /**
    * Creates a dummy event to parse.
@@ -188,6 +194,10 @@ describe('Keyboard event module', function () {
     'ARROW_RIGHT': 39,
     'ARROW_DOWN': 40
   };
+
+  afterEach(function () {
+    document.activeElement.blur();
+  });
 
   it('exists on the Siteapp API', function () {
     window.Siteapp.Keyboard.should.be.an('object');
@@ -246,7 +256,7 @@ describe('Keyboard event module', function () {
       var event = createEvent(keyCodes['ESCAPE']);
 
       testApp.Keyboard.handleKey(event, 'MyComponent', {
-        close: function () {
+        close: function close() {
           spy();
         }
       });
@@ -264,10 +274,10 @@ describe('Keyboard event module', function () {
       var event = createEvent(keyCodes['ESCAPE']);
 
       testApp.Keyboard.handleKey(event, 'MyComponent', {
-        close: function () {
+        close: function close() {
           // stuff
         },
-        handled: function () {
+        handled: function handled() {
           spy();
         }
       });
@@ -283,7 +293,7 @@ describe('Keyboard event module', function () {
       var event = createEvent(keyCodes['ESCAPE']);
 
       testApp.Keyboard.handleKey(event, 'MyComponent', {
-        unhandled: function () {
+        unhandled: function unhandled() {
           spy();
         }
       });
@@ -296,7 +306,7 @@ describe('Keyboard event module', function () {
     it('finds focusable elements inside a container', function () {
       var $html = $('<div>\n            <a href="#">Link</a>\n            <button>Button</button>\n          </div>').appendTo('body');
 
-      var $focusable = testApp.Keyboard.findFocusable($html);
+      var $focusable = TestApp.Keyboard.findFocusable($html);
 
       $focusable.length.should.be.equal(2);
 
@@ -398,6 +408,7 @@ describe('Keyboard event module', function () {
     });
   });
 });
+'use strict';
 
 describe('Log module', function () {
 
@@ -435,6 +446,8 @@ describe('Log module', function () {
         testApp.L.get(lastentry).should.not.be.undefined;
     });
 });
+'use strict';
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }

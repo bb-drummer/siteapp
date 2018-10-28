@@ -7,7 +7,6 @@ var doiuse = require('doiuse');
 
 var CONFIG = require('../config.js');
 
-gulp.task('check', ['check:deps', 'check:browserSupport']);
 
 // Check npm dependencies
 gulp.task('check:deps', function() {
@@ -24,3 +23,6 @@ gulp.task('check:browserSupport', function() {
       }
     })]))
 });
+
+//gulp.task('check', ['check:deps', 'check:browserSupport']);
+gulp.task('check', gulp.series(['check:deps', 'check:browserSupport']));

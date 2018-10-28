@@ -19,6 +19,10 @@ describe('Keyboard event module', function() {
     'ARROW_DOWN': 40
   };
 
+  afterEach(function() {
+    document.activeElement.blur();
+  });
+
   it('exists on the Siteapp API', function() {
     (window.Siteapp.Keyboard).should.be.an('object');
   });
@@ -129,9 +133,9 @@ describe('Keyboard event module', function() {
             <a href="#">Link</a>
             <button>Button</button>
           </div>`).appendTo('body');
-
-      let $focusable = testApp.Keyboard.findFocusable($html);
-
+      
+      let $focusable = TestApp.Keyboard.findFocusable($html);
+      
       $focusable.length.should.be.equal(2);
 
       $html.remove();

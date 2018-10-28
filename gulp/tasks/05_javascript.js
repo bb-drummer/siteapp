@@ -9,9 +9,6 @@ var named = require('vinyl-named');
 
 var CONFIG = require('../config.js');
 
-// Compiles JavaScript into a single file
-gulp.task('javascript', ['javascript:siteapp', 'javascript:deps'/*, 'javascript:docs'*/]);
-
 // NOTE: This sets up all imports from within Siteapp as externals, for the purpose
 // of replicating the "drop in dist file" approach of prior versions.
 // THIS IS NOT RECOMMENDED FOR MOST USERS. Chances are you either want everything
@@ -49,21 +46,21 @@ gulp.task('javascript:plugin-core', function() {
     .pipe(webpackStream({externals: {'jquery': 'jQuery'}, module: moduleConfig}, webpack2))
     .pipe(gulp.dest('_build/assets/js/plugins'));
 });
-gulp.task('javascript:plugins', ['javascript:plugin-core'], function() {
+gulp.task('javascript:plugins', gulp.series(['javascript:plugin-core', function() {
   return gulp.src(['js/entries/plugins/*.js', '!js/entries/plugins/siteapp.core.js'])
     .pipe(named())
     //.pipe(babel())
     .pipe(webpackStream({externals: pluginsAsExternals, module: moduleConfig}, webpack2))
     .pipe(gulp.dest('_build/assets/js/plugins'));
-});
+}]));
 
-gulp.task('javascript:siteapp', ['javascript:plugins'], function() {
+gulp.task('javascript:siteapp', gulp.series(['javascript:plugins', function() {
   return gulp.src('js/entries/*.js')
     .pipe(named())
     //.pipe(babel())
     .pipe(webpackStream({externals: {jquery: 'jQuery'}, module: moduleConfig}, webpack2))
     .pipe(gulp.dest('_build/assets/js'));
-});
+}]));
 //gulp.task('javascript:siteapp', function() {
 //  return gulp.src(CONFIG.JS_FILES)
 //    .pipe(babel()
@@ -84,3 +81,7 @@ gulp.task('javascript:docs', function() {
     .pipe(concat('docs.js'))
     .pipe(gulp.dest('_build/assets/js'));
 });
+
+//Compiles JavaScript into a single file
+gulp.task('javascript', gulp.series(['javascript:siteapp', 'javascript:deps'/*, 'javascript:docs'*/]));
+
