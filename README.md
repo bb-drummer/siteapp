@@ -14,24 +14,6 @@ just another application framework
 
 It is basically an abstraction of _Zurb Foundation_'s ([-> homepage](https://foundation.zurb.com/)) core mechanism. 
 
-So, **" Why, the heck, another framework ?! "** ... or ... **where this started from** ...
-
-While fooling around with _Foundation_ for some time I stumbled across a comment inside its core code:
-
-> // TODO: consider not making this a jQuery function
-
-so, I gave it a thought
-
-> " yeah ok, why not... let's go for it ^^ "
-
-coded here and there, tried this, tried that, played around some more, tried something other...
-And then eventually, when 'I stepped back and took a look from above', I noticed
-
-> " well... this has become just a _tiny little_ more than... 'not [] a jQuery function' "
-
-I took another look into my other _Foundation_ utilizing projects and picked some of the, so to say, best-of's and combined and refactored them into abstracted components. That way, the framework organically grew to what it is now: 
-
-> ***a framework to assist in building custom frontend applications which provides mechanisms and basic objects/classes to help creating and, automatically, instantiating custom modules/plugins related, but not restricted, to frontend/UI components.***
 
 
 ## Documentation
@@ -43,7 +25,10 @@ Learn how to utilize the **Siteapp** framework within your project:
 - [basic core usage](#basic-core-usage)
 - [basic module usage](#basic-module-usage)
 
-Due to the abstraction itself and its _organic_ growth (sorry for that O:) ) there are some objects to be utilized and mechanisms to apply by extending applications and/or components. There are a lot of new objects and there are a few ones inherited from the _Foundation_ core:
+Due to the abstraction itself there are some objects to be utilized 
+and mechanisms to apply by extending applications and/or components. 
+There are a lot of new objects and a few ones are inherited from 
+the _Foundation_ core:
 
 - [Application core](docs/core.md)
   - [Extending](docs/core.md#extending-the-base-object) the base object
@@ -91,14 +76,14 @@ $> npm install && npm test
 
 $>
 ```
-Afterwards, presuming the tests ran without failure, the framework's ready-to-use files can be found in the `dist/js/`folder.
+When the tests ran without failure, the framework's ready-to-use files can be found in the `dist/js/`folder.
 
-_Note:_ although there are some SASS/CSS files with the sources, **Siteapp** is not intended to provide styling for components, at this point.
+_Note:_ although there are some SASS/CSS files with the sources, **Siteapp** is not intended to provide styling for components at this point.
 
 
 ### Import the framework
 
-The framework could be imported via `require`
+The framework can be imported via `require`
 ```
 const Siteapp = require('path/to/siteapp');
 ```
